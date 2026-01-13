@@ -1,0 +1,43 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# remart
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The remart package is a reimplementation of the biomaRt package, using the same interface, but with a different backend under the hood.
+Indeed, the biomaRt package relies on the biomart online utility. But this utility is no longer maintained and is likely to be retired soon.
+
+This package aims to offer a drop-in replacement using the more modern and better maintained APIs provided by Ensembl.
+
+## Installation
+
+You can install the development version of remart like so:
+
+``` r
+pak::pak("Huber-group-EMBL/remart")
+```
+
+## Example
+
+```{r example}
+library(remart)
+remart::getSequence(
+  seqType = "gene_exon_intron",
+  type = "ensembl_gene_id",
+  id = "ENSG00000001497"
+)
+```

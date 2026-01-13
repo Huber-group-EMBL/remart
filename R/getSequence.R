@@ -1,0 +1,55 @@
+#' Get Sequences from Ensembl
+#' 
+#' @inheritParams biomaRt::getSequence
+#' 
+#' @export
+#' 
+#' @examples
+#' remart::getSequence(
+#'   seqType = "gene_exon_intron",
+#'   type = "ensembl_gene_id",
+#'   id = "ENSG00000001497"
+#' )
+#'
+#' ids <- c(
+#'  "ENSG00000003987",
+#'  "ENSG00000004939"
+#' )
+#' remart::getSequence(
+#'   seqType = "gene_exon_intron",
+#'   type = "ensembl_gene_id",
+#'   id = ids
+#' )
+getSequence <- function(
+  chromosome,
+  start,
+  end,
+  id,
+  type,
+  seqType,
+  upstream,
+  downstream,
+  mart,
+  useCache = TRUE,
+  verbose = FALSE
+) {
+  if (!missing(chromosome)) {
+    stop("Not implemented yet")
+  }
+
+  if (!missing(id)) {
+    if (type != "ensembl_gene_id") {
+      stop("Only Ensembl Gene IDs (ENSG...) are supported at the moment")
+    }
+    if (!is.list(id) && length(id) == 1) {
+      id <- list(id)
+    }
+    httr2::request("https://rest.ensembl.org/") |> 
+      httr2::req_url_path("sequence/id") |> 
+      httr2::req_method("POST") |> 
+      httr2::req_headers(`User-Agent` = "remart R package") |> 
+      httr2::req_body_json(list(ids = id)) |> 
+      httr2::req_perform() |>
+      httr2::resp_body_json(simplifyVector = TRUE)
+  }
+}
