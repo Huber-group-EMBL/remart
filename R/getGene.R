@@ -1,6 +1,7 @@
 #' Retries gene annotation information from Ensembl.
 #' 
 #' @inheritParams biomaRt::getGene
+#' @param ... Ignored. Used to catch no longer necessary parameters such as `mart` from \pkg{biomaRt} functions.
 #' 
 #' @export
 #' 
@@ -21,7 +22,7 @@
 getGene <- function(
   id,
   type = "ensembl_gene_id",
-  mart
+  ...
 ) {
   if (type != "ensembl_gene_id") {
     stop("Only Ensembl Gene IDs (ENS...) are supported at the moment")

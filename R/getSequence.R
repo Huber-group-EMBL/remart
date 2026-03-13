@@ -1,6 +1,7 @@
 #' Get Sequences from Ensembl
 #' 
 #' @inheritParams biomaRt::getSequence
+#' @inheritParams getGene
 #' 
 #' @export
 #' 
@@ -29,9 +30,9 @@ getSequence <- function(
   seqType,
   upstream,
   downstream,
-  mart,
   useCache = TRUE,
-  verbose = FALSE
+  verbose = FALSE,
+  ...
 ) {
   if (!missing(chromosome)) {
     stop("Not implemented yet")

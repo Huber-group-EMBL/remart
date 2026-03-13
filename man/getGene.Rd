@@ -4,7 +4,7 @@
 \alias{getGene}
 \title{Retries gene annotation information from Ensembl.}
 \usage{
-getGene(id, type = "ensembl_gene_id", mart)
+getGene(id, type = "ensembl_gene_id", ...)
 }
 \arguments{
 \item{id}{vector of gene identifiers one wants to annotate}
@@ -14,8 +14,7 @@ listFilters function.  Examples are entrezgene_id, hgnc_symbol (for hugo
 gene symbol), ensembl_gene_id, unigene, agilentprobe, affy_hg_u133_plus_2,
 refseq_dna, etc.}
 
-\item{mart}{object of class Mart, containing connections to the BioMart
-databases.  You can create such an object using the function \code{\link[biomaRt:useMart]{useMart()}}.}
+\item{...}{Ignored. Used to catch no longer necessary parameters such as \code{mart} from \pkg{biomaRt} functions.}
 }
 \description{
 Retries gene annotation information from Ensembl.
