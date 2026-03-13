@@ -2,8 +2,11 @@ Package: remart
 Title: Reimplementation of the 'biomaRt' Package Using Modern Ensembl APIs
 Version: 0.0.0.9000
 Authors@R: 
+  c(
     person("Hugo", "Gruson", , "hugo.gruson@embl.de", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-4094-1476"))
+           comment = c(ORCID = "0000-0002-4094-1476")),
+    person("German Network for Bioinformatics Infrastructure - de.NBI", role = "fnd")
+  )
 Description: This package aims to offer a drop-in replacement to biomaRt
     using the same interface but the more modern and better maintained
     APIs provided by Ensembl.
