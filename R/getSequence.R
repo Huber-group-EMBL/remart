@@ -39,7 +39,7 @@ getSequence <- function(
 
   if (!missing(id)) {
     if (type != "ensembl_gene_id") {
-      stop("Only Ensembl Gene IDs (ENSG...) are supported at the moment")
+      stop("Only Ensembl Gene IDs (ENS...) are supported at the moment")
     }
     if (!is.list(id) && length(id) == 1) {
       id <- list(id)
