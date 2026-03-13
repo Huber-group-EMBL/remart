@@ -58,7 +58,7 @@ Get Sequences from Ensembl
 remart::getSequence(
   seqType = "gene_exon_intron",
   type = "ensembl_gene_id",
-  id = list("ENSG00000001497")
+  id = "ENSG00000001497"
 )
 
 ids <- c(
