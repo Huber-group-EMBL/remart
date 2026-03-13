@@ -44,10 +44,18 @@ getSequence <- function(
     if (!is.list(id) && length(id) == 1) {
       id <- list(id)
     }
+
+    req <- list(
+      ids = id,
+      expand_3prime = downstream,
+      expand_5prime = upstream
+    )
+    req <- req[lengths(req) > 0]
+
     httr2::request("https://rest.ensembl.org/") |> 
       httr2::req_url_path("sequence/id") |> 
       httr2::req_method("POST") |> 
-      httr2::req_headers(`User-Agent` = "remart R package") |> 
+      httr2::req_user_agent("remart R package") |> 
       httr2::req_body_json(list(ids = id)) |> 
       httr2::req_perform() |>
       httr2::resp_body_json(simplifyVector = TRUE)
