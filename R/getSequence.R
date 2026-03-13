@@ -47,11 +47,14 @@ getSequence <- function(
     }
 
     req <- list(
-      ids = id,
-      expand_3prime = downstream,
-      expand_5prime = upstream
+      ids = id
     )
-    req <- req[lengths(req) > 0]
+    if (!missing(upstream)) {
+      req$expand_5prime <- upstream
+    }
+    if (!missing(downstream)) {
+      req$expand_3prime <- downstream
+    }
 
     httr2::request("https://rest.ensembl.org/") |> 
       httr2::req_url_path("sequence/id") |> 
