@@ -30,8 +30,6 @@ getSequence <- function(
   seqType,
   upstream,
   downstream,
-  useCache = TRUE,
-  verbose = FALSE,
   ...
 ) {
   if (!missing(chromosome)) {
