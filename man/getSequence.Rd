@@ -13,8 +13,6 @@ getSequence(
   seqType,
   upstream,
   downstream,
-  useCache = TRUE,
-  verbose = FALSE,
   ...
 )
 }
@@ -40,13 +38,6 @@ basepairs to the output.}
 
 \item{downstream}{To add the downstream sequence of a specified number of
 basepairs to the output.}
-
-\item{useCache}{If \code{useCache = TRUE} then biomaRt will try to store
-succesful query results on disk, and will load these if a query is run
-again, rather than contacting the Ensembl server.}
-
-\item{verbose}{If `verbose = TRUE`` then the XML query that was send to the
-webservice will be displayed.}
 
 \item{...}{Ignored. Used to catch no longer necessary parameters such as \code{mart} from \pkg{biomaRt} functions.}
 }
