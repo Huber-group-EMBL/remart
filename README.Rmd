@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # remart
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/Huber-group-EMBL/remart/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Huber-group-EMBL/remart/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The remart package is a reimplementation of the biomaRt package, using the same interface, but with a different backend under the hood.
