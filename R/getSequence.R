@@ -37,8 +37,8 @@ getSequence <- function(
   }
 
   if (!missing(id)) {
-    if (type != "ensembl_gene_id") {
-      stop("Only Ensembl Gene IDs (ENS...) are supported at the moment")
+    if (type %notin% c("ensembl_gene_id", "ensembl_transcript_id")) {
+      stop("Only Ensembl IDs (ENS...) are supported at the moment")
     }
     if (!is.list(id) && length(id) == 1) {
       id <- list(id)
@@ -54,11 +54,18 @@ getSequence <- function(
       req$expand_3prime <- downstream
     }
 
+    seq_type <- switch(
+      seqType,
+      "gene_exon_intron" = "genomic",
+      "peptide" = "protein", # see example use in DominoEffect package
+      stop("Invalid seqType. Must be one of 'gene_exon_intron', or 'peptide'.")
+    )
+
     httr2::request("https://rest.ensembl.org/") |> 
       httr2::req_url_path("sequence/id") |> 
       httr2::req_method("POST") |> 
       httr2::req_user_agent("remart R package") |> 
-      httr2::req_body_json(list(ids = id)) |> 
+      httr2::req_body_json(list(ids = id, type = seq_type)) |> 
       httr2::req_perform() |>
       httr2::resp_body_json(simplifyVector = TRUE)
   }
