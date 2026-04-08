@@ -9,6 +9,9 @@
 
 ## Citation
 
+Source:
+[`DESCRIPTION`](https://github.com/Huber-group-EMBL/remart/blob/main/DESCRIPTION)
+
 Gruson H (2026). *remart: Reimplementation of the 'biomaRt' Package
 Using Modern Ensembl APIs*. R package version 0.0.0.9000,
 <https://huber-group-embl.github.io/remart/>.
