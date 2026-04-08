@@ -51,12 +51,12 @@ remart::getGene(
 )
 #> Warning: 'band' column information is not available from the Ensembl REST API, it will be filled with NA values.
 #>   ensembl_gene_id hgnc_symbol
-#> 1 ENSG00000003987       MTMR7
-#> 2 ENSG00000004939      SLC4A1
+#> 1 ENSG00000004939      SLC4A1
+#> 2 ENSG00000003987       MTMR7
 #>                                                                                description
-#> 1                        myotubularin related protein 7 [Source:HGNC Symbol;Acc:HGNC:7454]
-#> 2 solute carrier family 4 member 1 (Diego blood group) [Source:HGNC Symbol;Acc:HGNC:11027]
+#> 1 solute carrier family 4 member 1 (Diego blood group) [Source:HGNC Symbol;Acc:HGNC:11027]
+#> 2                        myotubularin related protein 7 [Source:HGNC Symbol;Acc:HGNC:7454]
 #>   chromosome_name band strand start_position end_position
-#> 1               8   NA     -1       17296794     17413528
-#> 2              17   NA     -1       44248390     44268141
+#> 1              17   NA     -1       44248390     44268141
+#> 2               8   NA     -1       17296794     17413528
 ```
