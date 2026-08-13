@@ -13,12 +13,14 @@ and better maintained APIs provided by Ensembl.
 You can install the development version of remart like so:
 
 ``` r
+
 pak::pak("Huber-group-EMBL/remart")
 ```
 
 ## Example
 
 ``` r
+
 library(remart)
 remart::getSequence(
   seqType = "gene_exon_intron",
