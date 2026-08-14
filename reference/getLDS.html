@@ -51,8 +51,8 @@
 <span>  <span class="va">attributesL</span>,</span>
 <span>  filtersL <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  valuesL <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  <span class="va">speciesL</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">speciesL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -88,18 +88,18 @@ using the function <code>listFilters()</code>.</p></dd>
 <dd><p>Values for the linked dataset filters</p></dd>
 
 
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Ignored. Used to catch no longer necessary parameters such as
+<code>mart</code>, <code>martL</code>, <code>verbose</code>, <code>uniqueRows</code> and <code>bmHeader</code> from
+<span class="pkg">biomaRt</span> functions.</p></dd>
+
+
 <dt id="arg-speciesl">speciesL<a class="anchor" aria-label="anchor" href="#arg-speciesl"></a></dt>
 <dd><p>Ensembl name (e.g. <code>"mouse"</code> or <code>"mus_musculus"</code>) of the
 species to look up orthologues in. This replaces the <code>martL</code> argument
 used in <span class="pkg">biomaRt</span>, as connections to Ensembl datasets are no longer
 needed, but the species of the linked dataset can not be inferred from
 <code>attributesL</code>/<code>filtersL</code>/<code>valuesL</code> alone.</p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Ignored. Used to catch no longer necessary parameters such as
-<code>mart</code>, <code>martL</code>, <code>verbose</code>, <code>uniqueRows</code> and <code>bmHeader</code> from
-<span class="pkg">biomaRt</span> functions.</p></dd>
 
 </dl></div>
     <div class="section level2">

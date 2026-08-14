@@ -12,8 +12,8 @@ getLDS(
   attributesL,
   filtersL = "",
   valuesL = "",
-  speciesL,
-  ...
+  ...,
+  speciesL
 )
 ```
 
@@ -47,6 +47,12 @@ getLDS(
 
   Values for the linked dataset filters
 
+- ...:
+
+  Ignored. Used to catch no longer necessary parameters such as `mart`,
+  `martL`, `verbose`, `uniqueRows` and `bmHeader` from biomaRt
+  functions.
+
 - speciesL:
 
   Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to
@@ -54,12 +60,6 @@ getLDS(
   biomaRt, as connections to Ensembl datasets are no longer needed, but
   the species of the linked dataset can not be inferred from
   `attributesL`/`filtersL`/`valuesL` alone.
-
-- ...:
-
-  Ignored. Used to catch no longer necessary parameters such as `mart`,
-  `martL`, `verbose`, `uniqueRows` and `bmHeader` from biomaRt
-  functions.
 
 ## Value
 
