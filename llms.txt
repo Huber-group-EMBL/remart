@@ -37,7 +37,7 @@ remart::getSequence(
 
 # Package index
 
-## All functions
+## Get sequences, annotations, related identifiers, etc.
 
 - [`getBM()`](https://huber-group-embl.github.io/remart/reference/getBM.md)
   : Retrieve gene/transcript annotations from Ensembl
@@ -48,8 +48,15 @@ remart::getSequence(
 - [`getSequence()`](https://huber-group-embl.github.io/remart/reference/getSequence.md)
   : Get Sequences from Ensembl
 
+## Helper functions
+
+- [`listAttributes()`](https://huber-group-embl.github.io/remart/reference/listAttributes.md)
+  : List supported attributes
+
 # Articles
 
 ### All vignettes
 
 - [design](https://huber-group-embl.github.io/remart/articles/design.md):
+- [Introduction to
+  remart](https://huber-group-embl.github.io/remart/articles/remart.md):

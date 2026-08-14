@@ -1,6 +1,6 @@
 # Package index
 
-## All functions
+## Get sequences, annotations, related identifiers, etc.
 
 - [`getBM()`](https://huber-group-embl.github.io/remart/reference/getBM.md)
   : Retrieve gene/transcript annotations from Ensembl
@@ -10,3 +10,8 @@
   : Retrieve orthologous gene annotations across two species
 - [`getSequence()`](https://huber-group-embl.github.io/remart/reference/getSequence.md)
   : Get Sequences from Ensembl
+
+## Helper functions
+
+- [`listAttributes()`](https://huber-group-embl.github.io/remart/reference/listAttributes.md)
+  : List supported attributes

@@ -26,6 +26,27 @@ getGene(id, type = "ensembl_gene_id", ...)
   Ignored. Used to catch no longer necessary parameters such as `mart`
   from biomaRt functions.
 
+## Value
+
+A data frame containing the following gene annotations for the requested
+IDs:
+
+- `ensembl_gene_id`
+
+- `hgnc_symbol`
+
+- `description`
+
+- `chromosome_name`
+
+- `band` (not available from Ensembl REST API, will be filled with NA)
+
+- `strand`
+
+- `start_position`
+
+- `end_position`
+
 ## Examples
 
 ``` r

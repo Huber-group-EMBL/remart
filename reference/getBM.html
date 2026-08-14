@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">remart</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,11 +15,13 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/remart.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/design.html">design</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/Huber-group-EMBL/remart/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -51,7 +53,7 @@
 
 <dl><dt id="arg-attributes">attributes<a class="anchor" aria-label="anchor" href="#arg-attributes"></a></dt>
 <dd><p>Attributes you want to retrieve.  A possible list of
-attributes can be retrieved using the function <code>listAttributes()</code>.</p></dd>
+attributes can be retrieved using the function <code><a href="listAttributes.html">listAttributes()</a></code>.</p></dd>
 
 
 <dt id="arg-filters">filters<a class="anchor" aria-label="anchor" href="#arg-filters"></a></dt>
@@ -73,6 +75,14 @@ the filters argument.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A data frame containing the requested gene or transcript
+annotations, with one column for each requested attribute.
+The number of rows does not necessarily match the number of
+requested identifiers, as some attributes can have multiple values
+for a single identifier (e.g. a gene with multiple transcripts).</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Only a subset of the attributes and filters supported by the <code>biomaRt</code>
 package are currently implemented, as this data has to be retrieved
@@ -88,14 +98,54 @@ BioMart query engine.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">remart</span><span class="fu">::</span><span class="fu">getBM</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  attributes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span>, <span class="st">"chromosome_name"</span><span class="op">)</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">attribs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span>, <span class="st">"chromosome_name"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">remart</span><span class="fu">::</span><span class="fu">getBM</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  attributes <span class="op">=</span> <span class="va">attribs</span>,</span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span></span>
 <span class="r-in"><span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ENSG00000157764"</span>, <span class="st">"ENSG00000004939"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id external_gene_name chromosome_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 ENSG00000157764               BRAF               7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 ENSG00000004939             SLC4A1              17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ensembl_gene_id external_gene_name chromosome_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36 ENSG00000004939             SLC4A1              17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37 ENSG00000004939             SLC4A1              17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38 ENSG00000004939             SLC4A1              17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39 ENSG00000004939             SLC4A1              17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40 ENSG00000004939             SLC4A1              17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41 ENSG00000004939             SLC4A1              17</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

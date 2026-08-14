@@ -22,7 +22,8 @@ getLDS(
 - attributes:
 
   Attributes you want to retrieve of primary dataset. A possible list of
-  attributes can be retrieved using the function `listAttributes()`.
+  attributes can be retrieved using the function
+  [`listAttributes()`](https://huber-group-embl.github.io/remart/reference/listAttributes.md).
 
 - filters:
 
@@ -59,6 +60,11 @@ getLDS(
   Ignored. Used to catch no longer necessary parameters such as `mart`,
   `martL`, `verbose`, `uniqueRows` and `bmHeader` from biomaRt
   functions.
+
+## Value
+
+A data frame containing source-species and target-species ortholog
+annotations.
 
 ## Details
 
