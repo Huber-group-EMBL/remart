@@ -82,7 +82,7 @@ Only `filters = "ensembl_gene_id"` is supported.
 ## Examples
 
 ``` r
-remart::getLDS(
+getLDS(
   attributes = c("ensembl_gene_id", "external_gene_name"),
   filters = "ensembl_gene_id",
   values = "ENSG00000157764",

@@ -61,7 +61,7 @@ Supported attributes: `ensembl_gene_id`, `ensembl_transcript_id`,
 
 ``` r
 attribs <- c("ensembl_gene_id", "external_gene_name", "chromosome_name")
-remart::getBM(
+getBM(
   attributes = attribs,
   filters = "ensembl_gene_id",
   values = c("ENSG00000157764", "ENSG00000004939")
