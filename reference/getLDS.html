@@ -128,8 +128,7 @@ cross-database attribute linking <code>biomaRt::getLDS()</code> could perform.</
 <span class="r-in"><span>  attributesL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  speciesL <span class="op">=</span> <span class="st">"mouse"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 ENSG00000157764               BRAF ENSMUSG00000002413                 Braf</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request("https://rest.ensembl.org"),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))):</span> HTTP 500 Internal Server Error.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

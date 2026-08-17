@@ -87,20 +87,6 @@ gene_annotations <- getBM(
 )
 
 head(gene_annotations)
-#>   ensembl_gene_id external_gene_name chromosome_name start_position
-#> 1 ENSG00000157764               BRAF               7      140719327
-#> 2 ENSG00000157764               BRAF               7      140719327
-#> 3 ENSG00000157764               BRAF               7      140719327
-#> 4 ENSG00000157764               BRAF               7      140719327
-#> 5 ENSG00000157764               BRAF               7      140719327
-#> 6 ENSG00000157764               BRAF               7      140719327
-#>   end_position
-#> 1    140925199
-#> 2    140925199
-#> 3    140925199
-#> 4    140925199
-#> 5    140925199
-#> 6    140925199
 ```
 
 Attributes are returned in the order requested. Duplicate identifiers
@@ -127,20 +113,6 @@ transcript_annotations <- getBM(
 )
 
 head(transcript_annotations)
-#>   ensembl_gene_id ensembl_transcript_id ensembl_peptide_id
-#> 1 ENSG00000157764       ENST00000496384    ENSP00000419060
-#> 2 ENSG00000157764       ENST00000644969    ENSP00000496776
-#> 3 ENSG00000157764       ENST00000644120               <NA>
-#> 4 ENSG00000157764       ENST00000642875               <NA>
-#> 5 ENSG00000157764       ENST00000646891    ENSP00000493543
-#> 6 ENSG00000157764       ENST00000644905               <NA>
-#>               transcript_biotype
-#> 1                 protein_coding
-#> 2                 protein_coding
-#> 3 protein_coding_CDS_not_defined
-#> 4                retained_intron
-#> 5                 protein_coding
-#> 6                retained_intron
 ```
 
 Alternatively, transcript identifiers can be used as the filter when the
@@ -157,8 +129,6 @@ getBM(
   filters = "ensembl_transcript_id",
   values = "ENST00000357654"
 )
-#>   ensembl_transcript_id ensembl_gene_id ensembl_peptide_id
-#> 1       ENST00000357654 ENSG00000012048    ENSP00000350283
 ```
 
 ## Use the `getGene()` compatibility wrapper
@@ -173,18 +143,6 @@ getGene(
   id = c("ENSG00000157764", "ENSG00000004939"),
   type = "ensembl_gene_id"
 )
-#> Warning in getGene(id = c("ENSG00000157764", "ENSG00000004939"), type =
-#> "ensembl_gene_id"): 'band' column information is not available from the Ensembl
-#> REST API, it will be filled with NA values.
-#>   ensembl_gene_id hgnc_symbol
-#> 1 ENSG00000157764        BRAF
-#> 2 ENSG00000004939      SLC4A1
-#>                                                                                description
-#> 1         B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]
-#> 2 solute carrier family 4 member 1 (Diego blood group) [Source:HGNC Symbol;Acc:HGNC:11027]
-#>   chromosome_name band strand start_position end_position
-#> 1               7   NA     -1      140719327    140925199
-#> 2              17   NA     -1       44248390     44268162
 ```
 
 The returned columns include `ensembl_gene_id`, `hgnc_symbol`, genomic
@@ -227,8 +185,6 @@ extended_cdna <- getSequence(
 )
 
 summary(extended_cdna)
-#> Length  Class   Mode 
-#>      0   NULL   NULL
 ```
 
 Coordinate-based requests using `chromosome`, `start`, and `end` are not
@@ -368,13 +324,12 @@ utils::sessionInfo()
 #> loaded via a namespace (and not attached):
 #>  [1] cli_3.6.6           knitr_1.51          rlang_1.3.0        
 #>  [4] xfun_0.60           otel_0.2.0          textshaping_1.0.5  
-#>  [7] jsonlite_2.0.0      glue_1.8.1          htmltools_0.5.9    
-#> [10] ragg_1.5.2          sass_0.4.10         rmarkdown_2.31     
-#> [13] evaluate_1.0.5      jquerylib_0.1.4     fastmap_1.2.0      
-#> [16] yaml_2.3.12         lifecycle_1.0.5     httr2_1.3.0        
-#> [19] bookdown_0.47       BiocManager_1.30.27 compiler_4.6.1     
-#> [22] fs_2.1.0            systemfonts_1.3.2   digest_0.6.39      
-#> [25] R6_2.6.1            curl_7.1.0          magrittr_2.0.5     
-#> [28] bslib_0.12.0        tools_4.6.1         pkgdown_2.2.1      
-#> [31] cachem_1.1.0        desc_1.4.3
+#>  [7] jsonlite_2.0.0      htmltools_0.5.9     ragg_1.5.2         
+#> [10] sass_0.4.10         rmarkdown_2.31      evaluate_1.0.5     
+#> [13] jquerylib_0.1.4     fastmap_1.2.0       yaml_2.3.12        
+#> [16] lifecycle_1.0.5     bookdown_0.47       BiocManager_1.30.27
+#> [19] compiler_4.6.1      fs_2.1.0            systemfonts_1.3.2  
+#> [22] digest_0.6.39       R6_2.6.1            curl_7.1.0         
+#> [25] bslib_0.12.0        tools_4.6.1         pkgdown_2.2.1      
+#> [28] cachem_1.1.0        desc_1.4.3
 ```

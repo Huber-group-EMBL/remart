@@ -59,7 +59,7 @@
 
       <h1>Introduction to remart</h1>
             
-            <h4 data-toc-skip class="date">14 August 2026</h4>
+            <h4 data-toc-skip class="date">17 August 2026</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Huber-group-EMBL/remart/blob/main/vignettes/remart.Rmd" class="external-link"><code>vignettes/remart.Rmd</code></a></small>
       <div class="d-none name"><code>remart.Rmd</code></div>
@@ -137,21 +137,7 @@ object is not required.</p>
 <span>  values <span class="op">=</span> <span class="va">gene_ids</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gene_annotations</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   ensembl_gene_id external_gene_name chromosome_name start_position</span></span>
-<span><span class="co">#&gt; 1 ENSG00000157764               BRAF               7      140719327</span></span>
-<span><span class="co">#&gt; 2 ENSG00000157764               BRAF               7      140719327</span></span>
-<span><span class="co">#&gt; 3 ENSG00000157764               BRAF               7      140719327</span></span>
-<span><span class="co">#&gt; 4 ENSG00000157764               BRAF               7      140719327</span></span>
-<span><span class="co">#&gt; 5 ENSG00000157764               BRAF               7      140719327</span></span>
-<span><span class="co">#&gt; 6 ENSG00000157764               BRAF               7      140719327</span></span>
-<span><span class="co">#&gt;   end_position</span></span>
-<span><span class="co">#&gt; 1    140925199</span></span>
-<span><span class="co">#&gt; 2    140925199</span></span>
-<span><span class="co">#&gt; 3    140925199</span></span>
-<span><span class="co">#&gt; 4    140925199</span></span>
-<span><span class="co">#&gt; 5    140925199</span></span>
-<span><span class="co">#&gt; 6    140925199</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gene_annotations</span><span class="op">)</span></span></code></pre></div>
 <p>Attributes are returned in the order requested. Duplicate identifiers
 are handled internally, while identifiers that Ensembl cannot find are
 omitted with a warning.</p>
@@ -174,21 +160,7 @@ rows for one gene.</p>
 <span>  values <span class="op">=</span> <span class="st">"ENSG00000157764"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">transcript_annotations</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   ensembl_gene_id ensembl_transcript_id ensembl_peptide_id</span></span>
-<span><span class="co">#&gt; 1 ENSG00000157764       ENST00000496384    ENSP00000419060</span></span>
-<span><span class="co">#&gt; 2 ENSG00000157764       ENST00000644969    ENSP00000496776</span></span>
-<span><span class="co">#&gt; 3 ENSG00000157764       ENST00000644120               &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4 ENSG00000157764       ENST00000642875               &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5 ENSG00000157764       ENST00000646891    ENSP00000493543</span></span>
-<span><span class="co">#&gt; 6 ENSG00000157764       ENST00000644905               &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;               transcript_biotype</span></span>
-<span><span class="co">#&gt; 1                 protein_coding</span></span>
-<span><span class="co">#&gt; 2                 protein_coding</span></span>
-<span><span class="co">#&gt; 3 protein_coding_CDS_not_defined</span></span>
-<span><span class="co">#&gt; 4                retained_intron</span></span>
-<span><span class="co">#&gt; 5                 protein_coding</span></span>
-<span><span class="co">#&gt; 6                retained_intron</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">transcript_annotations</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, transcript identifiers can be used as the filter when
 the query is transcript-oriented:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -200,9 +172,7 @@ the query is transcript-oriented:</p>
 <span>  <span class="op">)</span>,</span>
 <span>  filters <span class="op">=</span> <span class="st">"ensembl_transcript_id"</span>,</span>
 <span>  values <span class="op">=</span> <span class="st">"ENST00000357654"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt;   ensembl_transcript_id ensembl_gene_id ensembl_peptide_id</span></span>
-<span><span class="co">#&gt; 1       ENST00000357654 ENSG00000012048    ENSP00000350283</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="use-the-getgene-compatibility-wrapper">Use the <code>getGene()</code> compatibility wrapper<a class="anchor" aria-label="anchor" href="#use-the-getgene-compatibility-wrapper"></a>
@@ -213,19 +183,7 @@ the query is transcript-oriented:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/getGene.html">getGene</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ENSG00000157764"</span>, <span class="st">"ENSG00000004939"</span><span class="op">)</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in getGene(id = c("ENSG00000157764", "ENSG00000004939"), type =</span></span>
-<span><span class="co">#&gt; "ensembl_gene_id"): 'band' column information is not available from the Ensembl</span></span>
-<span><span class="co">#&gt; REST API, it will be filled with NA values.</span></span>
-<span><span class="co">#&gt;   ensembl_gene_id hgnc_symbol</span></span>
-<span><span class="co">#&gt; 1 ENSG00000157764        BRAF</span></span>
-<span><span class="co">#&gt; 2 ENSG00000004939      SLC4A1</span></span>
-<span><span class="co">#&gt;                                                                                description</span></span>
-<span><span class="co">#&gt; 1         B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]</span></span>
-<span><span class="co">#&gt; 2 solute carrier family 4 member 1 (Diego blood group) [Source:HGNC Symbol;Acc:HGNC:11027]</span></span>
-<span><span class="co">#&gt;   chromosome_name band strand start_position end_position</span></span>
-<span><span class="co">#&gt; 1               7   NA     -1      140719327    140925199</span></span>
-<span><span class="co">#&gt; 2              17   NA     -1       44248390     44268162</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The returned columns include <code>ensembl_gene_id</code>,
 <code>hgnc_symbol</code>, genomic coordinates, strand, and description.
 Ensembl’s REST response does not provide the <code>band</code> field
@@ -259,9 +217,7 @@ queries:</p>
 <span>  downstream <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">extended_cdna</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Length  Class   Mode </span></span>
-<span><span class="co">#&gt;      0   NULL   NULL</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">extended_cdna</span><span class="op">)</span></span></code></pre></div>
 <p>Coordinate-based requests using <code>chromosome</code>,
 <code>start</code>, and <code>end</code> are not yet implemented.</p>
 </div>
@@ -387,15 +343,14 @@ GitHub.</p>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] cli_3.6.6           knitr_1.51          rlang_1.3.0        </span></span>
 <span><span class="co">#&gt;  [4] xfun_0.60           otel_0.2.0          textshaping_1.0.5  </span></span>
-<span><span class="co">#&gt;  [7] jsonlite_2.0.0      glue_1.8.1          htmltools_0.5.9    </span></span>
-<span><span class="co">#&gt; [10] ragg_1.5.2          sass_0.4.10         rmarkdown_2.31     </span></span>
-<span><span class="co">#&gt; [13] evaluate_1.0.5      jquerylib_0.1.4     fastmap_1.2.0      </span></span>
-<span><span class="co">#&gt; [16] yaml_2.3.12         lifecycle_1.0.5     httr2_1.3.0        </span></span>
-<span><span class="co">#&gt; [19] bookdown_0.47       BiocManager_1.30.27 compiler_4.6.1     </span></span>
-<span><span class="co">#&gt; [22] fs_2.1.0            systemfonts_1.3.2   digest_0.6.39      </span></span>
-<span><span class="co">#&gt; [25] R6_2.6.1            curl_7.1.0          magrittr_2.0.5     </span></span>
-<span><span class="co">#&gt; [28] bslib_0.12.0        tools_4.6.1         pkgdown_2.2.1      </span></span>
-<span><span class="co">#&gt; [31] cachem_1.1.0        desc_1.4.3</span></span></code></pre></div>
+<span><span class="co">#&gt;  [7] jsonlite_2.0.0      htmltools_0.5.9     ragg_1.5.2         </span></span>
+<span><span class="co">#&gt; [10] sass_0.4.10         rmarkdown_2.31      evaluate_1.0.5     </span></span>
+<span><span class="co">#&gt; [13] jquerylib_0.1.4     fastmap_1.2.0       yaml_2.3.12        </span></span>
+<span><span class="co">#&gt; [16] lifecycle_1.0.5     bookdown_0.47       BiocManager_1.30.27</span></span>
+<span><span class="co">#&gt; [19] compiler_4.6.1      fs_2.1.0            systemfonts_1.3.2  </span></span>
+<span><span class="co">#&gt; [22] digest_0.6.39       R6_2.6.1            curl_7.1.0         </span></span>
+<span><span class="co">#&gt; [25] bslib_0.12.0        tools_4.6.1         pkgdown_2.2.1      </span></span>
+<span><span class="co">#&gt; [28] cachem_1.1.0        desc_1.4.3</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

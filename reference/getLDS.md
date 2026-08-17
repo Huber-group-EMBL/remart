@@ -89,6 +89,5 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1
-#> 1 ENSG00000157764               BRAF ENSMUSG00000002413                 Braf
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request("https://rest.ensembl.org"),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))): HTTP 500 Internal Server Error.
 ```
