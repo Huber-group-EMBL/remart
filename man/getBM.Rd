@@ -4,7 +4,7 @@
 \alias{getBM}
 \title{Retrieve gene/transcript annotations from Ensembl}
 \usage{
-getBM(attributes, filters = "", values = "", ...)
+getBM(attributes, filters = "", values = "", ..., species = NULL)
 }
 \arguments{
 \item{attributes}{Attributes you want to retrieve.  A possible list of
@@ -21,6 +21,12 @@ the filters argument.}
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
 \code{mart}, \code{checkFilters}, \code{verbose}, \code{uniqueRows}, \code{bmHeader}, \code{quote} and
 \code{useCache} from \pkg{biomaRt} functions.}
+
+\item{species}{Ensembl name (e.g. \code{"mouse"} or \code{"mus_musculus"}) of the
+species to look Ensembl IDs for if, e.g., \code{external_gene_name} is provided
+in \code{filters}. In \pkg{biomaRt}, this was inferred from the \code{mart}
+argument, but since this argument is no longer used, the species must be
+provided explicitly.}
 }
 \value{
 A data frame containing the requested gene or transcript
@@ -39,7 +45,7 @@ through the Ensembl REST \code{lookup/id} endpoint rather than a generic
 BioMart query engine.
 
 Supported filters (only one can be used at a time): \code{ensembl_gene_id},
-\code{ensembl_transcript_id}.
+\code{ensembl_transcript_id}, \code{external_gene_name}.
 
 Supported attributes: \code{ensembl_gene_id}, \code{ensembl_transcript_id},
 \code{ensembl_peptide_id}, \code{external_gene_name}, \code{description},
@@ -52,5 +58,14 @@ getBM(
   attributes = attribs,
   filters = "ensembl_gene_id",
   values = c("ENSG00000157764", "ENSG00000004939")
+)
+
+# It is also possible to a gene symbol, but a species must be specified, as
+# gene symbols are not unique across species.
+getBM(
+  attributes = attribs,
+  filters = "external_gene_name",
+  values = c("APOE", "MAPT"),
+  species = "human"
 )
 }
