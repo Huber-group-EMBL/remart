@@ -17,7 +17,7 @@
 #' BioMart query engine.
 #'
 #' Supported filters (only one can be used at a time): `ensembl_gene_id`,
-#' `ensembl_transcript_id`.
+#' `ensembl_transcript_id`, `external_gene_name`.
 #'
 #' Supported attributes: `ensembl_gene_id`, `ensembl_transcript_id`,
 #' `ensembl_peptide_id`, `external_gene_name`, `description`,
@@ -38,6 +38,15 @@
 #'   attributes = attribs,
 #'   filters = "ensembl_gene_id",
 #'   values = c("ENSG00000157764", "ENSG00000004939")
+#' )
+#'
+#' # It is also possible to a gene symbol, but a species must be specified, as
+#' # gene symbols are not unique across species.
+#' getBM(
+#'   attributes = attribs,
+#'   filters = "external_gene_name",
+#'   values = c("APOE", "MAPT"),
+#'   species = "human"
 #' )
 getBM <- function(
   attributes,
