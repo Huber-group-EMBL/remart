@@ -13,13 +13,13 @@ Source:
 [`DESCRIPTION`](https://github.com/Huber-group-EMBL/remart/blob/main/DESCRIPTION)
 
 Gruson H (2026). *remart: Reimplementation of the 'biomaRt' Package
-Using Modern Ensembl APIs*. R package version 0.99.1,
+Using Modern Ensembl APIs*. R package version 0.99.2,
 <https://huber-group-embl.github.io/remart/>.
 
     @Manual{,
       title = {remart: Reimplementation of the 'biomaRt' Package Using Modern Ensembl APIs},
       author = {Hugo Gruson},
       year = {2026},
-      note = {R package version 0.99.1},
+      note = {R package version 0.99.2},
       url = {https://huber-group-embl.github.io/remart/},
     }
