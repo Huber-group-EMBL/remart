@@ -129,6 +129,35 @@ test_that("getBM() on transcript IDs can return gene level info", {
   )
 })
 
+test_that("getBM() on gene symbols can return gene level info", {
+  result <- getBM(
+    attributes = c(
+      "ensembl_gene_id",
+      "external_gene_name",
+      "description"
+    ),
+    filters = "external_gene_name",
+    values = c("APOE", "MAPT"),
+    species = "human"
+  ) |>
+    expect_no_error() |>
+    expect_no_warning()
+
+  expect_s3_class(result, "data.frame")
+  expect_named(
+    result,
+    c(
+      "ensembl_gene_id",
+      "external_gene_name",
+      "description"
+    )
+  )
+  expect_setequal(
+    result$external_gene_name,
+    c("APOE", "MAPT")
+  )
+})
+
 test_that("getBM() fails with unsupported input", {
   expect_error(
     getBM(
@@ -146,5 +175,14 @@ test_that("getBM() fails with unsupported input", {
       values = c("ENSG00000157764", "ENSG00000004939")
     ),
     "Unsupported attribute\\(s\\): unsupported_attribute"
+  )
+
+  expect_error(
+    getBM(
+      attributes = c("ensembl_gene_id", "external_gene_name"),
+      filters = "external_gene_name",
+      values = c("APOE", "MAPT")
+    ),
+    "The `species` argument must be provided when using filters other than"
   )
 })
