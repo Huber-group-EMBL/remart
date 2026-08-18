@@ -4,6 +4,11 @@
 #' @param ... Ignored. Used to catch no longer necessary parameters such as
 #'   `mart`, `checkFilters`, `verbose`, `uniqueRows`, `bmHeader`, `quote` and
 #'   `useCache` from \pkg{biomaRt} functions.
+#' @param species Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the
+#'   species to look Ensembl IDs for if, e.g., `external_gene_name` is provided
+#'   in `filters`. In \pkg{biomaRt}, this was inferred from the `mart`
+#'   argument, but since this argument is no longer used, the species must be
+#'   provided explicitly.
 #'
 #' @details
 #' Only a subset of the attributes and filters supported by the `biomaRt`
@@ -38,15 +43,18 @@ getBM <- function(
   attributes,
   filters = "",
   values = "",
-  ...
+  ...,
+  species = NULL
 ) {
   stopifnot(
     is.character(attributes),
     is.character(filters),
-    is.character(values)
+    is.character(values),
+    is.null(species) || is.character(species)
   )
 
-  supported_filters <- c("ensembl_gene_id", "ensembl_transcript_id")
+  ensembl_ids <- c("ensembl_gene_id", "ensembl_transcript_id")
+  supported_filters <- c(ensembl_ids, "external_gene_name")
   transcript_level_attributes <- .listTranscriptLevelAttributes()
   supported_attributes <- listAttributes()
 
@@ -54,6 +62,12 @@ getBM <- function(
     stop(
       "Only a single filter is supported at the moment, and must be one of: ",
       toString(supported_filters)
+    )
+  }
+  if (filters %notin% ensembl_ids && is.null(species)) {
+    stop(
+      "The `species` argument must be provided when using filters other than ",
+      toString(ensembl_ids)
     )
   }
 
@@ -75,10 +89,23 @@ getBM <- function(
     stop("`values` must contain at least one identifier.")
   }
 
-  needs_transcripts <- any(attributes %in% transcript_level_attributes) ||
-    filters == "ensembl_transcript_id"
+  has_transcript_attributes <- any(
+    attributes %notin% .listGeneLevelAttributes()
+  )
 
-  ids <- .remart_lookup_id(values, expand = needs_transcripts)
+  ids <- switch(
+    filters,
+    "ensembl_gene_id" = .remart_lookup_id(
+      values,
+      expand = has_transcript_attributes
+    ),
+    "ensembl_transcript_id" = .remart_lookup_id(values, expand = TRUE),
+    "external_gene_name" = .remart_lookup_symbol(
+      values,
+      species = species,
+      expand = has_transcript_attributes
+    )
+  )
 
   missing_ids <- values[lengths(ids) == 0L]
   if (length(missing_ids) > 0L) {
@@ -88,13 +115,13 @@ getBM <- function(
     )
   }
 
-  if (filters == "ensembl_gene_id") {
+  if (filters %in% c("ensembl_gene_id", "external_gene_name")) {
     rows <- lapply(ids, function(gene) {
       if (is.null(gene)) {
         return(NULL)
       }
       transcripts <- gene$Transcript
-      if (!needs_transcripts || is.null(transcripts)) {
+      if (!has_transcript_attributes || is.null(transcripts)) {
         .remart_bm_row(attributes, gene = gene)
       } else {
         lapply(

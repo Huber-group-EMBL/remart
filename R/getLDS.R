@@ -1,14 +1,14 @@
 #' Retrieve orthologous gene annotations across two species
 #'
 #' @inheritParams biomaRt::getLDS
+#' @param ... Ignored. Used to catch no longer necessary parameters such as
+#'   `mart`, `martL`, `verbose`, `uniqueRows` and `bmHeader` from
+#'   \pkg{biomaRt} functions.
 #' @param speciesL Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the
 #'   species to look up orthologues in. This replaces the `martL` argument
 #'   used in \pkg{biomaRt}, as connections to Ensembl datasets are no longer
 #'   needed, but the species of the linked dataset can not be inferred from
 #'   `attributesL`/`filtersL`/`valuesL` alone.
-#' @param ... Ignored. Used to catch no longer necessary parameters such as
-#'   `mart`, `martL`, `verbose`, `uniqueRows` and `bmHeader` from
-#'   \pkg{biomaRt} functions.
 #'
 #' @details
 #' This function relies on the Ensembl REST `homology/id` endpoint, and
@@ -43,7 +43,7 @@ getLDS <- function(
   filtersL = "",
   valuesL = "",
   ...,
-  speciesL
+  speciesL = NULL
 ) {
   stopifnot(
     is.character(attributes),
