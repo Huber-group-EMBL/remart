@@ -1,6 +1,6 @@
 Package: remart
 Title: Reimplementation of the 'biomaRt' Package Using Modern Ensembl APIs
-Version: 0.99.2
+Version: 0.99.3
 Authors@R: c(
     person("Hugo", "Gruson", , "hugo.gruson@embl.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4094-1476")),
