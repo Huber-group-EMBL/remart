@@ -5,7 +5,7 @@ Retries gene annotation information from Ensembl.
 ## Usage
 
 ``` r
-getGene(id, type = "ensembl_gene_id", ...)
+getGene(id, type = "ensembl_gene_id", ..., species = NULL)
 ```
 
 ## Arguments
@@ -25,6 +25,14 @@ getGene(id, type = "ensembl_gene_id", ...)
 
   Ignored. Used to catch no longer necessary parameters such as `mart`
   from biomaRt functions.
+
+- species:
+
+  Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to
+  look Ensembl IDs for if, e.g., `external_gene_name` is provided in
+  `filters`. In biomaRt, this was inferred from the `mart` argument, but
+  since this argument is no longer used, the species must be provided
+  explicitly.
 
 ## Value
 

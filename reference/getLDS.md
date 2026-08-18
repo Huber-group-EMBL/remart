@@ -13,6 +13,7 @@ getLDS(
   filtersL = "",
   valuesL = "",
   ...,
+  species = NULL,
   speciesL = NULL
 )
 ```
@@ -53,6 +54,14 @@ getLDS(
   `martL`, `verbose`, `uniqueRows` and `bmHeader` from biomaRt
   functions.
 
+- species:
+
+  Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to
+  look Ensembl IDs for if, e.g., `external_gene_name` is provided in
+  `filters`. In biomaRt, this was inferred from the `mart` argument, but
+  since this argument is no longer used, the species must be provided
+  explicitly.
+
 - speciesL:
 
   Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to
@@ -77,7 +86,8 @@ Supported filters/attributes (for both `filters`/`attributes` and
 `external_gene_name`, `description`, `chromosome_name`,
 `start_position`, `end_position`, `strand`, `gene_biotype`.
 
-Only `filters = "ensembl_gene_id"` is supported.
+Only `"ensembl_gene_id"` and `"external_gene_name"` are supported for
+`filter`.
 
 ## Examples
 
@@ -91,4 +101,17 @@ getLDS(
 )
 #>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1
 #> 1 ENSG00000157764               BRAF ENSMUSG00000002413                 Braf
+
+# It is also possible to a gene symbol, but a species must be specified, as
+# gene symbols are not unique across species.
+getLDS(
+  attributes = c("ensembl_gene_id", "external_gene_name"),
+  filters = "external_gene_name",
+  values = "APOE",
+  species = "human",
+  attributesL = c("ensembl_gene_id", "external_gene_name"),
+  speciesL = "mouse"
+)
+#>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1
+#> 1 ENSG00000130203               APOE ENSMUSG00000002985                 Apoe
 ```
