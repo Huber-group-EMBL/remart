@@ -54,13 +54,7 @@ remart::getGene(
   "ENSG00000157764",
   type = "ensembl_gene_id"
 )
-#> Warning: 'band' column information is not available from the Ensembl REST API, it will be filled with NA values.
-#>   ensembl_gene_id hgnc_symbol
-#> 1 ENSG00000157764        BRAF
-#>                                                                        description
-#> 1 B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]
-#>   chromosome_name band strand start_position end_position
-#> 1               7   NA     -1      140719327    140925199
+#> Error in res[ids]: invalid subscript type 'list'
 
 ids <- c(
  "ENSG00000003987",
