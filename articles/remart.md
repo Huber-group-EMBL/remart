@@ -273,18 +273,6 @@ for source compatibility. Check
 and the function reference before migrating a workflow that uses less
 common filters or attributes.
 
-## Reproducibility and limitations
-
-Because *[remart](https://bioconductor.org/packages/3.23/remart)*
-queries Ensembl at execution time, a result is determined by the current
-Ensembl service and annotation release rather than by a bundled
-snapshot. For reproducible analyses, record the date of access, the
-Ensembl identifiers queried, the requested attributes, and the version
-of *[remart](https://bioconductor.org/packages/3.23/remart)*.
-
-Additionally, Ensembl is the supported backend; arbitrary BioMart
-databases are not.
-
 ## Roadmap and future direction
 
 We aim to implement additional filters and attributes, but we do not

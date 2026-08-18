@@ -34,7 +34,8 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/design.html">design</a></li>
+<li><a class="dropdown-item" href="../articles/biomaRt_comparison.html">Comparison between remart and biomaRt</a></li>
+    <li><a class="dropdown-item" href="../articles/design.html">Design principles for the remart package</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -290,18 +291,6 @@ directly:</p>
 <code>...</code> for source compatibility. Check
 <code><a href="../reference/listAttributes.html">listAttributes()</a></code> and the function reference before
 migrating a workflow that uses less common filters or attributes.</p>
-</div>
-<div class="section level2">
-<h2 id="reproducibility-and-limitations">Reproducibility and limitations<a class="anchor" aria-label="anchor" href="#reproducibility-and-limitations"></a>
-</h2>
-<p>Because <em><a href="https://bioconductor.org/packages/3.23/remart" class="external-link">remart</a></em>
-queries Ensembl at execution time, a result is determined by the current
-Ensembl service and annotation release rather than by a bundled
-snapshot. For reproducible analyses, record the date of access, the
-Ensembl identifiers queried, the requested attributes, and the version
-of <em><a href="https://bioconductor.org/packages/3.23/remart" class="external-link">remart</a></em>.</p>
-<p>Additionally, Ensembl is the supported backend; arbitrary BioMart
-databases are not.</p>
 </div>
 <div class="section level2">
 <h2 id="roadmap-and-future-direction">Roadmap and future direction<a class="anchor" aria-label="anchor" href="#roadmap-and-future-direction"></a>

@@ -1,4 +1,4 @@
-# design
+# Design principles for the remart package
 
 ## Function names, signatures, and return values
 

@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Design principles for the remart package • remart</title>
+<title>Comparison between remart and biomaRt • remart</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Design principles for the remart package">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Comparison between remart and biomaRt">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -58,50 +58,46 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Design principles for the remart package</h1>
+      <h1>Comparison between remart and biomaRt</h1>
             
             <h4 data-toc-skip class="date">18 August 2026</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Huber-group-EMBL/remart/blob/main/vignettes/design.Rmd" class="external-link"><code>vignettes/design.Rmd</code></a></small>
-      <div class="d-none name"><code>design.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/Huber-group-EMBL/remart/blob/main/vignettes/biomaRt_comparison.Rmd" class="external-link"><code>vignettes/biomaRt_comparison.Rmd</code></a></small>
+      <div class="d-none name"><code>biomaRt_comparison.Rmd</code></div>
     </div>
 
     
     
+<p>While we tried as much as possible to reproduce the biomaRt
+interface, there are some differences between the two packages, and
+limitations that we won’t be able to overcome.</p>
 <div class="section level2">
-<h2 id="function-names-signatures-and-return-values">Function names, signatures, and return values<a class="anchor" aria-label="anchor" href="#function-names-signatures-and-return-values"></a>
-</h2>
-<p>The function names, arguments, and return values come from the
-biomaRt package, as this package is aiming to be a drop-in replacement
-for biomaRt.</p>
-<p>Some arguments are no longer required, and are subsumed into the
-ellipsis (<code>...</code>) argument. For example, the <code>mart</code>
-argument is no longer required, as the connection to the database is
-handled internally by the package.</p>
-</div>
-<div class="section level2">
-<h2 id="faq">FAQ<a class="anchor" aria-label="anchor" href="#faq"></a>
+<h2 id="interface">Interface<a class="anchor" aria-label="anchor" href="#interface"></a>
 </h2>
 <div class="section level3">
-<h3 id="why-a-new-package">Why a new package?<a class="anchor" aria-label="anchor" href="#why-a-new-package"></a>
+<h3 id="new-species-speciesl-argument">New <code>species</code> / <code>speciesL</code> argument<a class="anchor" aria-label="anchor" href="#new-species-speciesl-argument"></a>
 </h3>
-<p>Two main reasons:</p>
-<ul>
-<li>Both packages can co-exist for a while, so we can start the
-migration even if all use cases are not yet supported by remart.</li>
-<li>While Ensembl is moving away from BioMart for newer releases:
-<ul>
-<li>Older releases remain available, and are still accessible via
-BioMart.</li>
-<li>BioMart is an open-source project that is also used by other
-databases. remart is only providing access to Ensembl.</li>
-</ul>
-</li>
-</ul>
-<p>There is thus value in keeping the biomaRt package alive to address
-more complex edge cases, and external Mart databases, while remart can
-provide a drop-in replacement for newer Ensembl releases.</p>
+<p>In biomaRt, the <code>mart</code> argument was used to specify the
+database to connect to, this usually contained some information about
+the species of interest. This enabled for example the conversion of gene
+symbols to Ensembl gene IDs (since multiple species can have the same
+gene symbol). In remart, the <code>mart</code> argument is no longer
+required, and the species of interest is specified via the new
+<code>species</code> argument in <code><a href="../reference/getBM.html">getBM()</a></code> and
+<code>speciesL</code> argument in <code><a href="../reference/getLDS.html">getLDS()</a></code>.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
+</h2>
+<p>Because <em><a href="https://bioconductor.org/packages/3.23/remart" class="external-link">remart</a></em>
+queries Ensembl at execution time, a result is determined by the current
+Ensembl service and annotation release rather than by a bundled
+snapshot. For reproducible analyses, record the date of access, the
+Ensembl identifiers queried, the requested attributes, and the version
+of <em><a href="https://bioconductor.org/packages/3.23/remart" class="external-link">remart</a></em>.</p>
+<p>Additionally, Ensembl is the supported backend; arbitrary BioMart
+databases are not.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
