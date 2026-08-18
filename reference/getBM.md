@@ -5,7 +5,7 @@ Retrieve gene/transcript annotations from Ensembl
 ## Usage
 
 ``` r
-getBM(attributes, filters = "", values = "", ...)
+getBM(attributes, filters = "", values = "", ..., species = NULL)
 ```
 
 ## Arguments
@@ -34,6 +34,14 @@ getBM(attributes, filters = "", values = "", ...)
   `checkFilters`, `verbose`, `uniqueRows`, `bmHeader`, `quote` and
   `useCache` from biomaRt functions.
 
+- species:
+
+  Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to
+  look Ensembl IDs for if, e.g., `external_gene_name` is provided in
+  `filters`. In biomaRt, this was inferred from the `mart` argument, but
+  since this argument is no longer used, the species must be provided
+  explicitly.
+
 ## Value
 
 A data frame containing the requested gene or transcript annotations,
@@ -50,7 +58,7 @@ through the Ensembl REST `lookup/id` endpoint rather than a generic
 BioMart query engine.
 
 Supported filters (only one can be used at a time): `ensembl_gene_id`,
-`ensembl_transcript_id`.
+`ensembl_transcript_id`, `external_gene_name`.
 
 Supported attributes: `ensembl_gene_id`, `ensembl_transcript_id`,
 `ensembl_peptide_id`, `external_gene_name`, `description`,
@@ -66,46 +74,19 @@ getBM(
   filters = "ensembl_gene_id",
   values = c("ENSG00000157764", "ENSG00000004939")
 )
-#>    ensembl_gene_id external_gene_name chromosome_name
-#> 1  ENSG00000157764               BRAF               7
-#> 2  ENSG00000157764               BRAF               7
-#> 3  ENSG00000157764               BRAF               7
-#> 4  ENSG00000157764               BRAF               7
-#> 5  ENSG00000157764               BRAF               7
-#> 6  ENSG00000157764               BRAF               7
-#> 7  ENSG00000157764               BRAF               7
-#> 8  ENSG00000157764               BRAF               7
-#> 9  ENSG00000157764               BRAF               7
-#> 10 ENSG00000157764               BRAF               7
-#> 11 ENSG00000157764               BRAF               7
-#> 12 ENSG00000157764               BRAF               7
-#> 13 ENSG00000157764               BRAF               7
-#> 14 ENSG00000157764               BRAF               7
-#> 15 ENSG00000157764               BRAF               7
-#> 16 ENSG00000157764               BRAF               7
-#> 17 ENSG00000157764               BRAF               7
-#> 18 ENSG00000157764               BRAF               7
-#> 19 ENSG00000157764               BRAF               7
-#> 20 ENSG00000157764               BRAF               7
-#> 21 ENSG00000157764               BRAF               7
-#> 22 ENSG00000157764               BRAF               7
-#> 23 ENSG00000157764               BRAF               7
-#> 24 ENSG00000157764               BRAF               7
-#> 25 ENSG00000157764               BRAF               7
-#> 26 ENSG00000157764               BRAF               7
-#> 27 ENSG00000157764               BRAF               7
-#> 28 ENSG00000157764               BRAF               7
-#> 29 ENSG00000157764               BRAF               7
-#> 30 ENSG00000157764               BRAF               7
-#> 31 ENSG00000157764               BRAF               7
-#> 32 ENSG00000157764               BRAF               7
-#> 33 ENSG00000157764               BRAF               7
-#> 34 ENSG00000157764               BRAF               7
-#> 35 ENSG00000157764               BRAF               7
-#> 36 ENSG00000004939             SLC4A1              17
-#> 37 ENSG00000004939             SLC4A1              17
-#> 38 ENSG00000004939             SLC4A1              17
-#> 39 ENSG00000004939             SLC4A1              17
-#> 40 ENSG00000004939             SLC4A1              17
-#> 41 ENSG00000004939             SLC4A1              17
+#>   ensembl_gene_id external_gene_name chromosome_name
+#> 1 ENSG00000157764               BRAF               7
+#> 2 ENSG00000004939             SLC4A1              17
+
+# It is also possible to a gene symbol, but a species must be specified, as
+# gene symbols are not unique across species.
+getBM(
+  attributes = attribs,
+  filters = "external_gene_name",
+  values = c("APOE", "MAPT"),
+  species = "human"
+)
+#>   ensembl_gene_id external_gene_name chromosome_name
+#> 1 ENSG00000130203               APOE              19
+#> 2 ENSG00000186868               MAPT              17
 ```

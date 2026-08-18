@@ -13,7 +13,7 @@ getLDS(
   filtersL = "",
   valuesL = "",
   ...,
-  speciesL
+  speciesL = NULL
 )
 ```
 
