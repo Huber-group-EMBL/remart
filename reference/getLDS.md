@@ -13,6 +13,7 @@ getLDS(
   filtersL = "",
   valuesL = "",
   ...,
+  version = NULL,
   species = NULL,
   speciesL = NULL
 )
@@ -113,5 +114,18 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request("https://rest.ensembl.org"),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))): HTTP 500 Internal Server Error.
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))): HTTP 503 Service Unavailable.
+
+# Query a specific Ensembl release for the source and target genes.
+getLDS(
+  attributes = c("ensembl_gene_id", "external_gene_name"),
+  filters = "ensembl_gene_id",
+  values = "ENSG00000157764",
+  attributesL = c("ensembl_gene_id", "external_gene_name"),
+  speciesL = "mouse",
+  version = 114
+)
+#>        row_source         row_target
+#> 1 ENSG00000157764 ENSMUSG00000002413
+#> 2            BRAF               Braf
 ```

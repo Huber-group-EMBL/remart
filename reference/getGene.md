@@ -5,7 +5,7 @@ Retries gene annotation information from Ensembl.
 ## Usage
 
 ``` r
-getGene(id, type = "ensembl_gene_id", ..., species = NULL)
+getGene(id, type = "ensembl_gene_id", ..., version = NULL, species = NULL)
 ```
 
 ## Arguments
@@ -60,7 +60,8 @@ IDs:
 ``` r
 remart::getGene(
   "ENSG00000157764",
-  type = "ensembl_gene_id"
+  type = "ensembl_gene_id",
+  version = 114
 )
 #> Warning: 'band' column information is not available from the Ensembl REST API, it will be filled with NA values.
 #>   ensembl_gene_id hgnc_symbol
@@ -68,7 +69,7 @@ remart::getGene(
 #>                                                                        description
 #> 1 B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]
 #>   chromosome_name band strand start_position end_position
-#> 1               7   NA     -1      140719327    140925199
+#> 1               7   NA     -1      140719327    140924929
 
 ids <- c(
  "ENSG00000003987",
@@ -76,7 +77,8 @@ ids <- c(
 )
 remart::getGene(
   id = ids,
-  type = "ensembl_gene_id"
+  type = "ensembl_gene_id",
+  version = "may2025"
 )
 #> Warning: 'band' column information is not available from the Ensembl REST API, it will be filled with NA values.
 #>   ensembl_gene_id hgnc_symbol
@@ -86,6 +88,6 @@ remart::getGene(
 #> 1                        myotubularin related protein 7 [Source:HGNC Symbol;Acc:HGNC:7454]
 #> 2 solute carrier family 4 member 1 (Diego blood group) [Source:HGNC Symbol;Acc:HGNC:11027]
 #>   chromosome_name band strand start_position end_position
-#> 1               8   NA     -1       17294951     17413528
-#> 2              17   NA     -1       44248390     44268162
+#> 1               8   NA     -1       17296794     17413528
+#> 2              17   NA     -1       44248390     44268141
 ```

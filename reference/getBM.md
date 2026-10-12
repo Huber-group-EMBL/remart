@@ -5,7 +5,14 @@ Retrieve gene/transcript annotations from Ensembl
 ## Usage
 
 ``` r
-getBM(attributes, filters = "", values = "", ..., species = NULL)
+getBM(
+  attributes,
+  filters = "",
+  values = "",
+  ...,
+  version = NULL,
+  species = NULL
+)
 ```
 
 ## Arguments
@@ -33,6 +40,11 @@ getBM(attributes, filters = "", values = "", ..., species = NULL)
   Ignored. Used to catch no longer necessary parameters such as `mart`,
   `checkFilters`, `verbose`, `uniqueRows`, `bmHeader`, `quote` and
   `useCache` from biomaRt functions.
+
+- version:
+
+  Ensembl version to use for the query. If `NULL`, the latest version
+  will be used.
 
 - species:
 
@@ -89,4 +101,25 @@ getBM(
 #>   ensembl_gene_id external_gene_name chromosome_name
 #> 1 ENSG00000130203               APOE              19
 #> 2 ENSG00000186868               MAPT              17
+
+# Query a specific Ensembl release (e.g. 114) instead of the latest one.
+getBM(
+  attributes = attribs,
+  filters = "ensembl_gene_id",
+  values = "ENSG00000157764",
+  version = 114
+)
+#>   ensembl_gene_id external_gene_name chromosome_name
+#> 1 ENSG00000157764               BRAF               7
+
+# Archived releases can also be specified by their release name.
+getBM(
+  attributes = attribs,
+  filters = "external_gene_name",
+  values = "APOE",
+  species = "human",
+  version = "may2025"
+)
+#>   ensembl_gene_id external_gene_name chromosome_name
+#> 1 ENSG00000130203               APOE              19
 ```

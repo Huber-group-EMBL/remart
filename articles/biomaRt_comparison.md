@@ -18,14 +18,10 @@ interest is specified via the new `species` argument in
 and `speciesL` argument in
 [`getLDS()`](https://huber-group-embl.github.io/remart/reference/getLDS.md).
 
-## Limitations
+### New `version` argument
 
-Because *[remart](https://bioconductor.org/packages/3.23/remart)*
-queries Ensembl at execution time, a result is determined by the current
-Ensembl service and annotation release rather than by a bundled
-snapshot. For reproducible analyses, record the date of access, the
-Ensembl identifiers queried, the requested attributes, and the version
-of *[remart](https://bioconductor.org/packages/3.23/remart)*.
-
-Additionally, Ensembl is the supported backend; arbitrary BioMart
-databases are not.
+In biomaRt, the Ensembl version to query could be specified with the
+`version` argument (or directly in the `host` argument) in
+`useEnsembl()`. In remart, the `version` argument is now available in
+all functions that query Ensembl, and it is used to specify the Ensembl
+release to query. If not specified, the latest release will be used.

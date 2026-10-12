@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">remart</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -263,7 +263,11 @@ workflow creates a connection before calling <code><a href="../reference/getBM.h
 <span>  <span class="st">"start_position"</span>,</span>
 <span>  <span class="st">"end_position"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">mart</span> <span class="op">&lt;-</span> <span class="fu">biomaRt</span><span class="fu">::</span><span class="fu">useEnsembl</span><span class="op">(</span><span class="st">"ensembl"</span>, dataset <span class="op">=</span> <span class="st">"hsapiens_gene_ensembl"</span><span class="op">)</span></span>
+<span><span class="va">mart</span> <span class="op">&lt;-</span> <span class="fu">biomaRt</span><span class="fu">::</span><span class="fu">useEnsembl</span><span class="op">(</span></span>
+<span>  <span class="st">"ensembl"</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"hsapiens_gene_ensembl"</span>,</span>
+<span>  version <span class="op">=</span> <span class="fl">114</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu">biomaRt</span><span class="fu">::</span><span class="fu">getBM</span><span class="op">(</span></span>
 <span>  attributes <span class="op">=</span> <span class="va">attrs</span>,</span>
 <span>  filters <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span>
@@ -285,7 +289,8 @@ directly:</p>
 <span><span class="fu"><a href="../reference/getBM.html">getBM</a></span><span class="op">(</span></span>
 <span>  attributes <span class="op">=</span> <span class="va">attrs</span>,</span>
 <span>  filters <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span>
-<span>  values <span class="op">=</span> <span class="va">gene_ids</span></span>
+<span>  values <span class="op">=</span> <span class="va">gene_ids</span>,</span>
+<span>  version <span class="op">=</span> <span class="fl">114</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Several obsolete connection-related arguments are accepted through
 <code>...</code> for source compatibility. Check
@@ -327,7 +332,7 @@ GitHub.</p>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] remart_0.99.5    BiocStyle_2.40.0</span></span>
+<span><span class="co">#&gt; [1] remart_0.99.6    BiocStyle_2.40.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] cli_3.6.6           knitr_1.52          rlang_1.3.0        </span></span>

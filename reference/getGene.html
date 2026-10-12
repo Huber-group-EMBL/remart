@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">remart</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getGene</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>, <span class="va">...</span>, species <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getGene</span><span class="op">(</span><span class="va">id</span>, type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>, <span class="va">...</span>, version <span class="op">=</span> <span class="cn">NULL</span>, species <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -93,7 +93,8 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">remart</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"ENSG00000157764"</span>,</span></span>
-<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span></span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span></span>
+<span class="r-in"><span>  version <span class="op">=</span> <span class="fl">114</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'band' column information is not available from the Ensembl REST API, it will be filled with NA values.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id hgnc_symbol</span>
@@ -101,7 +102,7 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                        description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   chromosome_name band strand start_position end_position</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               7   NA     -1      140719327    140925199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               7   NA     -1      140719327    140924929</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span> <span class="st">"ENSG00000003987"</span>,</span></span>
@@ -109,7 +110,8 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">remart</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  id <span class="op">=</span> <span class="va">ids</span>,</span></span>
-<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span></span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span></span>
+<span class="r-in"><span>  version <span class="op">=</span> <span class="st">"may2025"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'band' column information is not available from the Ensembl REST API, it will be filled with NA values.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id hgnc_symbol</span>
@@ -119,8 +121,8 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                        myotubularin related protein 7 [Source:HGNC Symbol;Acc:HGNC:7454]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 solute carrier family 4 member 1 (Diego blood group) [Source:HGNC Symbol;Acc:HGNC:11027]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   chromosome_name band strand start_position end_position</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               8   NA     -1       17294951     17413528</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2              17   NA     -1       44248390     44268162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               8   NA     -1       17296794     17413528</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              17   NA     -1       44248390     44268141</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

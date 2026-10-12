@@ -237,7 +237,11 @@ attrs <- c(
   "start_position",
   "end_position"
 )
-mart <- biomaRt::useEnsembl("ensembl", dataset = "hsapiens_gene_ensembl")
+mart <- biomaRt::useEnsembl(
+  "ensembl",
+  dataset = "hsapiens_gene_ensembl",
+  version = 114
+)
 biomaRt::getBM(
   attributes = attrs,
   filters = "ensembl_gene_id",
@@ -263,7 +267,8 @@ attrs <- c(
 getBM(
   attributes = attrs,
   filters = "ensembl_gene_id",
-  values = gene_ids
+  values = gene_ids,
+  version = 114
 )
 ```
 
@@ -307,7 +312,7 @@ utils::sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] remart_0.99.5    BiocStyle_2.40.0
+#> [1] remart_0.99.6    BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] cli_3.6.6           knitr_1.52          rlang_1.3.0        
