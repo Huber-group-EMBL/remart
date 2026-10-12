@@ -83,6 +83,7 @@ getSequence(
   type = "ensembl_gene_id",
   id = "ENSG00000001497"
 )
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/sequence/id"), "POST"), REMART_USER_AGENT), req)): HTTP 500 Internal Server Error.
 
 ids <- c(
  "ENSG00000003987",
@@ -93,6 +94,7 @@ getSequence(
   type = "ensembl_gene_id",
   id = ids
 )
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/sequence/id"), "POST"), REMART_USER_AGENT), req)): HTTP 500 Internal Server Error.
 
 # Retrieve sequences from a specific Ensembl release.
 getSequence(
