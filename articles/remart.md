@@ -288,7 +288,7 @@ not currently supported, please open an issue on GitHub.
 utils::sessionInfo()
 #> R version 4.6.1 (2026-06-24)
 #> Platform: x86_64-pc-linux-gnu
-#> Running under: Ubuntu 24.04.4 LTS
+#> Running under: Ubuntu 24.04.5 LTS
 #> 
 #> Matrix products: default
 #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -310,14 +310,14 @@ utils::sessionInfo()
 #> [1] remart_0.99.5    BiocStyle_2.40.0
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] cli_3.6.6           knitr_1.51          rlang_1.3.0        
-#>  [4] xfun_0.60           otel_0.2.0          textshaping_1.0.5  
+#>  [1] cli_3.6.6           knitr_1.52          rlang_1.3.0        
+#>  [4] xfun_0.61           otel_0.2.0          textshaping_1.0.5  
 #>  [7] jsonlite_2.0.0      htmltools_0.5.9     ragg_1.5.2         
-#> [10] sass_0.4.10         rmarkdown_2.31      evaluate_1.0.5     
+#> [10] sass_0.4.10         rmarkdown_2.32      evaluate_1.0.5     
 #> [13] jquerylib_0.1.4     fastmap_1.2.0       yaml_2.3.12        
-#> [16] lifecycle_1.0.5     bookdown_0.47       BiocManager_1.30.27
+#> [16] lifecycle_1.0.5     bookdown_0.48       BiocManager_1.30.27
 #> [19] compiler_4.6.1      fs_2.1.0            systemfonts_1.3.2  
-#> [22] digest_0.6.39       R6_2.6.1            curl_7.1.0         
+#> [22] digest_0.6.39       R6_2.6.1            curl_8.0.0         
 #> [25] bslib_0.12.0        tools_4.6.1         pkgdown_2.2.1      
 #> [28] cachem_1.1.0        desc_1.4.3
 ```
