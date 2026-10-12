@@ -102,6 +102,7 @@ getSequence <- function(
       "Must be one of 'gene_exon_intron', 'cdna', or 'peptide'."
     )
   )
+  req$mask_feature <- as.integer(TRUE)
 
   res <- httr2::request(.construct_versioned_url(version)) |>
     httr2::req_url_path("/sequence/id") |>
