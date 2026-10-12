@@ -36,6 +36,7 @@ getGene <- function(
   id,
   type = "ensembl_gene_id",
   ...,
+  version = NULL,
   species = NULL
 ) {
   if (type %notin% c("ensembl_gene_id", "external_gene_name")) {

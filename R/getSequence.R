@@ -33,7 +33,8 @@ getSequence <- function(
   seqType,
   upstream,
   downstream,
-  ...
+  ...,
+  version = NULL
 ) {
   if (!missing(chromosome)) {
     stop("Not implemented yet")

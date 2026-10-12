@@ -9,6 +9,8 @@
 #'   in `filters`. In \pkg{biomaRt}, this was inferred from the `mart`
 #'   argument, but since this argument is no longer used, the species must be
 #'   provided explicitly.
+#' @param version Ensembl version to use for the query. If `NULL`, the latest
+#'   version will be used.
 #'
 #' @details
 #' Only a subset of the attributes and filters supported by the `biomaRt`
@@ -53,6 +55,7 @@ getBM <- function(
   filters = "",
   values = "",
   ...,
+  version = NULL,
   species = NULL
 ) {
   stopifnot(
