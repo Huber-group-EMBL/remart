@@ -96,10 +96,10 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">remart</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu">getGene</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"ENSG00000157764"</span>,</span></span>
-<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span></span>
-<span class="r-in"><span>  version <span class="op">=</span> <span class="fl">114</span></span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'band' column information is not available from the Ensembl REST API, it will be filled with NA values.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id hgnc_symbol</span>
@@ -107,13 +107,13 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                        description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   chromosome_name band strand start_position end_position</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1               7   NA     -1      140719327    140924929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1               7   NA     -1      140719327    140925199</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span> <span class="st">"ENSG00000003987"</span>,</span></span>
 <span class="r-in"><span> <span class="st">"ENSG00000004939"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">remart</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu">getGene</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  id <span class="op">=</span> <span class="va">ids</span>,</span></span>
 <span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span></span>
 <span class="r-in"><span>  version <span class="op">=</span> <span class="st">"may2025"</span></span></span>
@@ -128,6 +128,7 @@ requested IDs:</p><ul><li><p><code>ensembl_gene_id</code></p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   chromosome_name band strand start_position end_position</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1               8   NA     -1       17296794     17413528</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2              17   NA     -1       44248390     44268141</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

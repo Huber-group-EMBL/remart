@@ -98,6 +98,7 @@ Only `"ensembl_gene_id"` and `"external_gene_name"` are supported for
 ## Examples
 
 ``` r
+# \donttest{
 getLDS(
   attributes = c("ensembl_gene_id", "external_gene_name"),
   filters = "ensembl_gene_id",
@@ -105,7 +106,7 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))): HTTP 500 Internal Server Error.
+#> Error in httr2::req_perform(httr2::req_user_agent(httr2::req_url_query(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     sprintf("/homology/id/%s/%s", species, id)), type = "orthologues",     target_species = target_species, `content-type` = "application/json"),     REMART_USER_AGENT)): HTTP 500 Internal Server Error.
 
 # It is also possible to a gene symbol, but a species must be specified, as
 # gene symbols are not unique across species.
@@ -128,7 +129,7 @@ getLDS(
   speciesL = "mouse",
   version = 114
 )
-#>        row_source         row_target
-#> 1 ENSG00000157764 ENSMUSG00000002413
-#> 2            BRAF               Braf
+#>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1
+#> 1 ENSG00000157764               BRAF ENSMUSG00000002413                 Braf
+# }
 ```

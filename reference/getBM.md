@@ -80,13 +80,16 @@ Supported attributes: `ensembl_gene_id`, `ensembl_transcript_id`,
 ## Examples
 
 ``` r
+# \donttest{
 attribs <- c("ensembl_gene_id", "external_gene_name", "chromosome_name")
 getBM(
   attributes = attribs,
   filters = "ensembl_gene_id",
   values = c("ENSG00000157764", "ENSG00000004939")
 )
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))): HTTP 500 Internal Server Error.
+#>   ensembl_gene_id external_gene_name chromosome_name
+#> 1 ENSG00000157764               BRAF               7
+#> 2 ENSG00000004939             SLC4A1              17
 
 # It is also possible to a gene symbol, but a species must be specified, as
 # gene symbols are not unique across species.
@@ -96,7 +99,9 @@ getBM(
   values = c("APOE", "MAPT"),
   species = "human"
 )
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))): HTTP 500 Internal Server Error.
+#>   ensembl_gene_id external_gene_name chromosome_name
+#> 1 ENSG00000130203               APOE              19
+#> 2 ENSG00000186868               MAPT              17
 
 # Query a specific Ensembl release (e.g. 114) instead of the latest one.
 getBM(
@@ -118,4 +123,5 @@ getBM(
 )
 #>   ensembl_gene_id external_gene_name chromosome_name
 #> 1 ENSG00000130203               APOE              19
+# }
 ```

@@ -119,13 +119,16 @@ BioMart query engine.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">attribs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span>, <span class="st">"chromosome_name"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="va">attribs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span>, <span class="st">"chromosome_name"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">getBM</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  attributes <span class="op">=</span> <span class="va">attribs</span>,</span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"ensembl_gene_id"</span>,</span></span>
 <span class="r-in"><span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ENSG00000157764"</span>, <span class="st">"ENSG00000004939"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))):</span> HTTP 500 Internal Server Error.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id external_gene_name chromosome_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 ENSG00000157764               BRAF               7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 ENSG00000004939             SLC4A1              17</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is also possible to a gene symbol, but a species must be specified, as</span></span></span>
 <span class="r-in"><span><span class="co"># gene symbols are not unique across species.</span></span></span>
@@ -135,7 +138,9 @@ BioMart query engine.</p>
 <span class="r-in"><span>  values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"APOE"</span>, <span class="st">"MAPT"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  species <span class="op">=</span> <span class="st">"human"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))):</span> HTTP 500 Internal Server Error.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id external_gene_name chromosome_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 ENSG00000130203               APOE              19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 ENSG00000186868               MAPT              17</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query a specific Ensembl release (e.g. 114) instead of the latest one.</span></span></span>
 <span class="r-in"><span><span class="fu">getBM</span><span class="op">(</span></span></span>
@@ -157,6 +162,7 @@ BioMart query engine.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ensembl_gene_id external_gene_name chromosome_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 ENSG00000130203               APOE              19</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

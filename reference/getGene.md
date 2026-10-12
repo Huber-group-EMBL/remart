@@ -63,10 +63,10 @@ IDs:
 ## Examples
 
 ``` r
-remart::getGene(
+# \donttest{
+getGene(
   "ENSG00000157764",
-  type = "ensembl_gene_id",
-  version = 114
+  type = "ensembl_gene_id"
 )
 #> Warning: 'band' column information is not available from the Ensembl REST API, it will be filled with NA values.
 #>   ensembl_gene_id hgnc_symbol
@@ -74,13 +74,13 @@ remart::getGene(
 #>                                                                        description
 #> 1 B-Raf proto-oncogene, serine/threonine kinase [Source:HGNC Symbol;Acc:HGNC:1097]
 #>   chromosome_name band strand start_position end_position
-#> 1               7   NA     -1      140719327    140924929
+#> 1               7   NA     -1      140719327    140925199
 
 ids <- c(
  "ENSG00000003987",
  "ENSG00000004939"
 )
-remart::getGene(
+getGene(
   id = ids,
   type = "ensembl_gene_id",
   version = "may2025"
@@ -95,4 +95,5 @@ remart::getGene(
 #>   chromosome_name band strand start_position end_position
 #> 1               8   NA     -1       17296794     17413528
 #> 2              17   NA     -1       44248390     44268141
+# }
 ```
