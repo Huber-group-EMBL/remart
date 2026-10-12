@@ -46,13 +46,21 @@ getSequence <- function(
         type = type,
         seqType = seqType,
         upstream = upstream,
-        downstream = downstream
+        downstream = downstream,
+        version = version
       )
     )
   }
 }
 
-.getSequenceFromId <- function(id, type, seqType, upstream, downstream) {
+.getSequenceFromId <- function(
+  id,
+  type,
+  seqType,
+  upstream,
+  downstream,
+  version = NULL
+) {
   if (
     type %notin%
       c("ensembl_gene_id", "ensembl_transcript_id", "ensembl_peptide_id")
@@ -84,8 +92,8 @@ getSequence <- function(
     )
   )
 
-  res <- httr2::request("https://rest.ensembl.org/") |>
-    httr2::req_url_path("sequence/id") |>
+  res <- httr2::request(.construct_versioned_url(version)) |>
+    httr2::req_url_path("/sequence/id") |>
     httr2::req_method("POST") |>
     httr2::req_user_agent(REMART_USER_AGENT) |>
     httr2::req_body_json(req) |>

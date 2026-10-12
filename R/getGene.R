@@ -53,6 +53,7 @@ getGene <- function(
   res <- .remart_lookup(
     values = id,
     filters = type,
+    version = version,
     species = species,
     expand = FALSE
   )

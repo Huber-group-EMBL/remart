@@ -124,6 +124,7 @@ getLDS <- function(
   source_genes <- .remart_lookup(
     values = values,
     filters = filters,
+    version = version,
     species = species,
     expand = FALSE
   )
@@ -146,11 +147,13 @@ getLDS <- function(
       filters,
       "ensembl_gene_id" = .remart_homologies_id(
         id,
+        version = version,
         species = gene$species,
         target_species = speciesL
       ),
       "external_gene_name" = .remart_homologies_symbol(
         id,
+        version = version,
         species = species,
         target_species = speciesL
       )
@@ -160,7 +163,11 @@ getLDS <- function(
     }
 
     target_ids <- vapply(homologies, function(h) h$target$id, character(1))
-    target_genes <- .remart_lookup_id(target_ids, expand = FALSE)
+    target_genes <- .remart_lookup_id(
+      target_ids,
+      version = version,
+      expand = FALSE
+    )
 
     lapply(homologies, function(h) {
       target_gene <- target_genes[[h$target$id]]

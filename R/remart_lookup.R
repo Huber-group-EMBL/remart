@@ -13,6 +13,7 @@
 .remart_lookup <- function(
   values,
   filters,
+  version = NULL,
   species = NULL,
   expand = FALSE
 ) {
@@ -20,19 +21,25 @@
     filters,
     "ensembl_gene_id" = .remart_lookup_id(
       values,
+      version = version,
       expand = expand
     ),
-    "ensembl_transcript_id" = .remart_lookup_id(values, expand = TRUE),
+    "ensembl_transcript_id" = .remart_lookup_id(
+      values,
+      version = version,
+      expand = TRUE
+    ),
     "external_gene_name" = .remart_lookup_symbol(
       values,
+      version = version,
       species = species,
       expand = expand
     )
   )
 }
 
-.remart_lookup_id <- function(ids, expand = FALSE) {
-  res <- httr2::request("https://rest.ensembl.org") |>
+.remart_lookup_id <- function(ids, version = NULL, expand = FALSE) {
+  res <- httr2::request(.construct_versioned_url(version)) |>
     httr2::req_url_path("/lookup/id") |>
     httr2::req_method("POST") |>
     httr2::req_user_agent(REMART_USER_AGENT) |>
@@ -48,8 +55,13 @@
   res[ids]
 }
 
-.remart_lookup_symbol <- function(symbols, species = NULL, expand = FALSE) {
-  res <- httr2::request("https://rest.ensembl.org") |>
+.remart_lookup_symbol <- function(
+  symbols,
+  version = NULL,
+  species = NULL,
+  expand = FALSE
+) {
+  res <- httr2::request(.construct_versioned_url(version)) |>
     httr2::req_url_path("/lookup/symbol") |>
     httr2::req_url_path_append(species) |>
     httr2::req_method("POST") |>
