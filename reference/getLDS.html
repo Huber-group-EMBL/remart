@@ -97,6 +97,11 @@ using the function <code>listFilters()</code>.</p></dd>
 <span class="pkg">biomaRt</span> functions.</p></dd>
 
 
+<dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
+<dd><p>Ensembl version to use for the query. If <code>NULL</code>, the latest
+version will be used.</p></dd>
+
+
 <dt id="arg-species">species<a class="anchor" aria-label="anchor" href="#arg-species"></a></dt>
 <dd><p>Ensembl name (e.g. <code>"mouse"</code> or <code>"mus_musculus"</code>) of the
 species to look Ensembl IDs for if, e.g., <code>external_gene_name</code> is provided
@@ -139,9 +144,7 @@ cross-database attribute linking <code>biomaRt::getLDS()</code> could perform.</
 <span class="r-in"><span>  attributesL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  speciesL <span class="op">=</span> <span class="st">"mouse"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        row_source         row_target</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 ENSG00000157764 ENSMUSG00000002413</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2            BRAF               Braf</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))):</span> HTTP 500 Internal Server Error.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is also possible to a gene symbol, but a species must be specified, as</span></span></span>
 <span class="r-in"><span><span class="co"># gene symbols are not unique across species.</span></span></span>
@@ -153,7 +156,7 @@ cross-database attribute linking <code>biomaRt::getLDS()</code> could perform.</
 <span class="r-in"><span>  attributesL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ensembl_gene_id"</span>, <span class="st">"external_gene_name"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  speciesL <span class="op">=</span> <span class="st">"mouse"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))):</span> HTTP 503 Service Unavailable.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))):</span> HTTP 500 Internal Server Error.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Query a specific Ensembl release for the source and target genes.</span></span></span>
 <span class="r-in"><span><span class="fu">getLDS</span><span class="op">(</span></span></span>

@@ -26,6 +26,11 @@ getGene(id, type = "ensembl_gene_id", ..., version = NULL, species = NULL)
   Ignored. Used to catch no longer necessary parameters such as `mart`
   from biomaRt functions.
 
+- version:
+
+  Ensembl version to use for the query. If `NULL`, the latest version
+  will be used.
+
 - species:
 
   Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to

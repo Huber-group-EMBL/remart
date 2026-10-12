@@ -55,6 +55,11 @@ getLDS(
   `martL`, `verbose`, `uniqueRows` and `bmHeader` from biomaRt
   functions.
 
+- version:
+
+  Ensembl version to use for the query. If `NULL`, the latest version
+  will be used.
+
 - species:
 
   Ensembl name (e.g. `"mouse"` or `"mus_musculus"`) of the species to
@@ -100,9 +105,7 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#>        row_source         row_target
-#> 1 ENSG00000157764 ENSMUSG00000002413
-#> 2            BRAF               Braf
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/id"), "POST"), REMART_USER_AGENT), list(ids = as.list(ids),     expand = as.integer(expand)))): HTTP 500 Internal Server Error.
 
 # It is also possible to a gene symbol, but a species must be specified, as
 # gene symbols are not unique across species.
@@ -114,7 +117,7 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))): HTTP 503 Service Unavailable.
+#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))): HTTP 500 Internal Server Error.
 
 # Query a specific Ensembl release for the source and target genes.
 getLDS(
