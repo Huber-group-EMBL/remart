@@ -2,6 +2,7 @@
 #'
 #' @inheritParams biomaRt::getSequence
 #' @inheritParams getGene
+#' @inheritParams getBM version
 #'
 #' @returns A data frame containing the requested sequences and their
 #'   associated metadata.
@@ -23,6 +24,14 @@
 #'   seqType = "gene_exon_intron",
 #'   type = "ensembl_gene_id",
 #'   id = ids
+#' )
+#'
+#' # Retrieve sequences from a specific Ensembl release.
+#' remart::getSequence(
+#'   seqType = "cdna",
+#'   type = "ensembl_gene_id",
+#'   id = "ENSG00000001497",
+#'   version = 114
 #' )
 getSequence <- function(
   chromosome,

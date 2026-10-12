@@ -50,6 +50,23 @@
 #'   values = c("APOE", "MAPT"),
 #'   species = "human"
 #' )
+#'
+#' # Query a specific Ensembl release (e.g. 114) instead of the latest one.
+#' getBM(
+#'   attributes = attribs,
+#'   filters = "ensembl_gene_id",
+#'   values = "ENSG00000157764",
+#'   version = 114
+#' )
+#'
+#' # Archived releases can also be specified by their release name.
+#' getBM(
+#'   attributes = attribs,
+#'   filters = "external_gene_name",
+#'   values = "APOE",
+#'   species = "human",
+#'   version = "may2025"
+#' )
 getBM <- function(
   attributes,
   filters = "",

@@ -47,6 +47,16 @@
 #'   attributesL = c("ensembl_gene_id", "external_gene_name"),
 #'   speciesL = "mouse"
 #' )
+#'
+#' # Query a specific Ensembl release for the source and target genes.
+#' getLDS(
+#'   attributes = c("ensembl_gene_id", "external_gene_name"),
+#'   filters = "ensembl_gene_id",
+#'   values = "ENSG00000157764",
+#'   attributesL = c("ensembl_gene_id", "external_gene_name"),
+#'   speciesL = "mouse",
+#'   version = 114
+#' )
 getLDS <- function(
   attributes,
   filters = "",

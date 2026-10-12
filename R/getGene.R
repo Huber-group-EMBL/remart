@@ -21,7 +21,8 @@
 #' @examples
 #' remart::getGene(
 #'   "ENSG00000157764",
-#'   type = "ensembl_gene_id"
+#'   type = "ensembl_gene_id",
+#'   version = 114
 #' )
 #'
 #' ids <- c(
@@ -30,7 +31,8 @@
 #' )
 #' remart::getGene(
 #'   id = ids,
-#'   type = "ensembl_gene_id"
+#'   type = "ensembl_gene_id",
+#'   version = "may2025"
 #' )
 getGene <- function(
   id,
