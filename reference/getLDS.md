@@ -106,7 +106,8 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#> Error in httr2::req_perform(httr2::req_user_agent(httr2::req_url_query(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     sprintf("/homology/id/%s/%s", species, id)), type = "orthologues",     target_species = target_species, `content-type` = "application/json"),     REMART_USER_AGENT)): HTTP 500 Internal Server Error.
+#>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1
+#> 1 ENSG00000157764               BRAF ENSMUSG00000002413                 Braf
 
 # It is also possible to a gene symbol, but a species must be specified, as
 # gene symbols are not unique across species.
@@ -118,7 +119,8 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
-#> Error in httr2::req_perform(httr2::req_body_json(httr2::req_user_agent(httr2::req_method(httr2::req_url_path_append(httr2::req_url_path(httr2::request(.construct_versioned_url(version)),     "/lookup/symbol"), species), "POST"), REMART_USER_AGENT),     list(symbols = as.list(symbols), expand = as.integer(expand)))): HTTP 500 Internal Server Error.
+#>   ensembl_gene_id external_gene_name  ensembl_gene_id.1 external_gene_name.1
+#> 1 ENSG00000130203               APOE ENSMUSG00000002985                 Apoe
 
 # Query a specific Ensembl release for the source and target genes.
 getLDS(
