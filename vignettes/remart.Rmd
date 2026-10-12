@@ -259,7 +259,11 @@ attrs <- c(
   "start_position",
   "end_position"
 )
-mart <- biomaRt::useEnsembl("ensembl", dataset = "hsapiens_gene_ensembl")
+mart <- biomaRt::useEnsembl(
+  "ensembl",
+  dataset = "hsapiens_gene_ensembl",
+  version = 114
+)
 biomaRt::getBM(
   attributes = attrs,
   filters = "ensembl_gene_id",
@@ -286,7 +290,8 @@ attrs <- c(
 getBM(
   attributes = attrs,
   filters = "ensembl_gene_id",
-  values = gene_ids
+  values = gene_ids,
+  version = 114
 )
 ```
 
