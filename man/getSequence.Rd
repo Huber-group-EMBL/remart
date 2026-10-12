@@ -13,7 +13,8 @@ getSequence(
   seqType,
   upstream,
   downstream,
-  ...
+  ...,
+  version = NULL
 )
 }
 \arguments{
@@ -41,6 +42,9 @@ basepairs to the output.}
 
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
 \code{mart} from \pkg{biomaRt} functions.}
+
+\item{version}{Ensembl version to use for the query. If \code{NULL}, the latest
+version will be used.}
 }
 \value{
 A data frame containing the requested sequences and their
@@ -64,5 +68,13 @@ remart::getSequence(
   seqType = "gene_exon_intron",
   type = "ensembl_gene_id",
   id = ids
+)
+
+# Retrieve sequences from a specific Ensembl release.
+remart::getSequence(
+  seqType = "cdna",
+  type = "ensembl_gene_id",
+  id = "ENSG00000001497",
+  version = 114
 )
 }

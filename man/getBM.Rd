@@ -4,7 +4,14 @@
 \alias{getBM}
 \title{Retrieve gene/transcript annotations from Ensembl}
 \usage{
-getBM(attributes, filters = "", values = "", ..., species = NULL)
+getBM(
+  attributes,
+  filters = "",
+  values = "",
+  ...,
+  version = NULL,
+  species = NULL
+)
 }
 \arguments{
 \item{attributes}{Attributes you want to retrieve.  A possible list of
@@ -21,6 +28,9 @@ the filters argument.}
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
 \code{mart}, \code{checkFilters}, \code{verbose}, \code{uniqueRows}, \code{bmHeader}, \code{quote} and
 \code{useCache} from \pkg{biomaRt} functions.}
+
+\item{version}{Ensembl version to use for the query. If \code{NULL}, the latest
+version will be used.}
 
 \item{species}{Ensembl name (e.g. \code{"mouse"} or \code{"mus_musculus"}) of the
 species to look Ensembl IDs for if, e.g., \code{external_gene_name} is provided
@@ -67,5 +77,22 @@ getBM(
   filters = "external_gene_name",
   values = c("APOE", "MAPT"),
   species = "human"
+)
+
+# Query a specific Ensembl release (e.g. 114) instead of the latest one.
+getBM(
+  attributes = attribs,
+  filters = "ensembl_gene_id",
+  values = "ENSG00000157764",
+  version = 114
+)
+
+# Archived releases can also be specified by their release name.
+getBM(
+  attributes = attribs,
+  filters = "external_gene_name",
+  values = "APOE",
+  species = "human",
+  version = "may2025"
 )
 }
