@@ -1,0 +1,38 @@
+{
+    "ENSMUSG00000002413": {
+        "description": "Braf transforming gene [Source:MGI Symbol;Acc:MGI:88190]",
+        "display_name": "Braf",
+        "start": 39580171,
+        "biotype": "protein_coding",
+        "db_type": "core",
+        "logic_name": "ensembl_havana_gene_mus_musculus",
+        "id": "ENSMUSG00000002413",
+        "strand": -1,
+        "seq_region_name": "6",
+        "end": 39702397,
+        "assembly_name": "GRCm39",
+        "object_type": "Gene",
+        "canonical_transcript": "ENSMUST00000002487.15",
+        "source": "ensembl_havana",
+        "species": "mus_musculus",
+        "version": 16
+    },
+    "ENSMUSG00000006574": {
+        "assembly_name": "GRCm39",
+        "end": 102257029,
+        "seq_region_name": "11",
+        "species": "mus_musculus",
+        "version": 16,
+        "canonical_transcript": "ENSMUST00000006749.10",
+        "source": "ensembl_havana",
+        "object_type": "Gene",
+        "strand": -1,
+        "db_type": "core",
+        "id": "ENSMUSG00000006574",
+        "logic_name": "ensembl_havana_gene_mus_musculus",
+        "description": "solute carrier family 4 (anion exchanger), member 1 [Source:MGI Symbol;Acc:MGI:109393]",
+        "display_name": "Slc4a1",
+        "start": 102239650,
+        "biotype": "protein_coding"
+    }
+}
