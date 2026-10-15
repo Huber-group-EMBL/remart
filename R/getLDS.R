@@ -141,15 +141,14 @@ getLDS <- function(
     expand = FALSE
   )
 
-  missing_ids <- values[vapply(source_genes[values], is.null, logical(1))]
+  missing_ids <- values[lengths(source_genes[values]) == 0]
   if (length(missing_ids) > 0) {
     warning(
       "The following identifiers were not found and will be ignored: ",
       toString(missing_ids)
     )
   }
-
-  found_ids <- values[!vapply(source_genes[values], is.null, logical(1))]
+  found_ids <- setdiff(values, missing_ids)
 
   homologies_by_id <- lapply(found_ids, function(id) {
     switch(
