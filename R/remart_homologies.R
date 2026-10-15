@@ -6,6 +6,7 @@
     httr2::req_url_path(sprintf("/homology/id/%s/%s", species, id)) |>
     httr2::req_url_query(
       type = "orthologues",
+      sequence = "none",
       target_species = target_species,
       `content-type` = "application/json"
     ) |>
@@ -26,6 +27,7 @@
     httr2::req_url_path(sprintf("/homology/symbol/%s/%s", species, symbol)) |>
     httr2::req_url_query(
       type = "orthologues",
+      sequence = "none",
       target_species = target_species,
       `content-type` = "application/json"
     ) |>
