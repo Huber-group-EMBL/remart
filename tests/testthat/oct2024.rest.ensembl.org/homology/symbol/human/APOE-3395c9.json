@@ -1,0 +1,35 @@
+{
+    "data": [
+        {
+            "homologies": [
+                {
+                    "method_link_type": "ENSEMBL_ORTHOLOGUES",
+                    "dn_ds": null,
+                    "target": {
+                        "perc_id": 72.0257,
+                        "cigar_line": "20M4DM4D282MD8M",
+                        "taxon_id": 10090,
+                        "id": "ENSMUSG00000002985",
+                        "species": "mus_musculus",
+                        "align_seq": "MKALWAVLLVTLLTGCLAEG----E----PEVTDQLEWQSNQPWEQALNRFWDYLRWVQTLSDQVQEELQSSQVTQELTALMEDTMTEVKAYKKELEEQLGPVAEETRARLGKEVQAAQARLGADMEDLRNRLGQYRNEVHTMLGQSTEEIRARLSTHLRKMRKRLMRDAEDLQKRLAVYKAGAREGAERGVSAIRERLGPLVEQGRQRTANLGAGAAQPLRDRAQAFGDRIRGRLEEVGNQARDRLEEVREHMEEVRSKMEEQTQQIRLQAEIFQARLKGWFEPIVEDMHRQWANLMEKIQASVATNPII-TPVAQENQ",
+                        "perc_pos": 84.2444,
+                        "protein_id": "ENSMUSP00000133302"
+                    },
+                    "taxonomy_level": "Euarchontoglires",
+                    "source": {
+                        "id": "ENSG00000130203",
+                        "species": "homo_sapiens",
+                        "align_seq": "MKVLWAALLVTFLAGCQAKVEQAVETEPEPELRQQTEWQSGQRWELALGRFWDYLRWVQTLSEQVQEELLSSQVTQELRALMDETMKELKAYKSELEEQLTPVAEETRARLSKELQAAQARLGADMEDVCGRLVQYRGEVQAMLGQSTEELRVRLASHLRKLRKRLLRDADDLQKRLAVYQAGAREGAERGLSAIRERLGPLVEQGRVRAATVGSLAGQPLQERAQAWGERLRARMEEMGSRTRDRLDEVKEQVAEVRAKLEEQAQQIRLQAEAFQARLKSWFEPLVEDMQRQWAGLVEKVQAAVGTSAA-P--VPSDNH",
+                        "perc_pos": 82.6498,
+                        "protein_id": "ENSP00000252486",
+                        "cigar_line": "310MDM2D6M",
+                        "taxon_id": 9606,
+                        "perc_id": 70.6625
+                    },
+                    "type": "ortholog_one2one"
+                }
+            ],
+            "id": "ENSG00000130203"
+        }
+    ]
+}

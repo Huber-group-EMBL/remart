@@ -1,0 +1,38 @@
+{
+    "ENSMUSG00000002985": {
+        "seq_region_name": "7",
+        "end": 19433113,
+        "assembly_name": "GRCm39",
+        "object_type": "Gene",
+        "canonical_transcript": "ENSMUST00000174064.9",
+        "source": "ensembl_havana",
+        "species": "mus_musculus",
+        "version": 17,
+        "strand": -1,
+        "db_type": "core",
+        "logic_name": "ensembl_havana_gene_mus_musculus",
+        "id": "ENSMUSG00000002985",
+        "description": "apolipoprotein E [Source:MGI Symbol;Acc:MGI:88057]",
+        "start": 19430034,
+        "display_name": "Apoe",
+        "biotype": "protein_coding"
+    },
+    "ENSMUSG00000018411": {
+        "db_type": "core",
+        "logic_name": "ensembl_havana_gene_mus_musculus",
+        "id": "ENSMUSG00000018411",
+        "description": "microtubule-associated protein tau [Source:MGI Symbol;Acc:MGI:97180]",
+        "biotype": "protein_coding",
+        "start": 104122216,
+        "display_name": "Mapt",
+        "seq_region_name": "11",
+        "assembly_name": "GRCm39",
+        "end": 104222916,
+        "object_type": "Gene",
+        "canonical_transcript": "ENSMUST00000106989.3",
+        "source": "ensembl_havana",
+        "species": "mus_musculus",
+        "version": 18,
+        "strand": 1
+    }
+}

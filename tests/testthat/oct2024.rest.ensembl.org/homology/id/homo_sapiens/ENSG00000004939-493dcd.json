@@ -1,0 +1,33 @@
+{
+    "data": [
+        {
+            "homologies": [
+                {
+                    "target": {
+                        "taxon_id": 10090,
+                        "protein_id": "ENSMUSP00000006749",
+                        "cigar_line": "3MD228MD341MD357M",
+                        "perc_pos": 87.944,
+                        "perc_id": 80.8396,
+                        "species": "mus_musculus",
+                        "id": "ENSMUSG00000006574"
+                    },
+                    "method_link_type": "ENSEMBL_ORTHOLOGUES",
+                    "dn_ds": null,
+                    "type": "ortholog_one2one",
+                    "taxonomy_level": "Euarchontoglires",
+                    "source": {
+                        "id": "ENSG00000004939",
+                        "species": "homo_sapiens",
+                        "perc_id": 82.4369,
+                        "perc_pos": 89.6817,
+                        "cigar_line": "13M11D34M3D3MD316M6D545M",
+                        "protein_id": "ENSP00000262418",
+                        "taxon_id": 9606
+                    }
+                }
+            ],
+            "id": "ENSG00000004939"
+        }
+    ]
+}

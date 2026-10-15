@@ -1,0 +1,33 @@
+{
+    "data": [
+        {
+            "homologies": [
+                {
+                    "dn_ds": null,
+                    "method_link_type": "ENSEMBL_ORTHOLOGUES",
+                    "target": {
+                        "species": "mus_musculus",
+                        "id": "ENSMUSG00000018411",
+                        "perc_id": 72.8972,
+                        "protein_id": "ENSMUSP00000102602",
+                        "taxon_id": 10090,
+                        "cigar_line": "15M11D98M104D74M9D31MD91M5D62M2D378M",
+                        "perc_pos": 79.0387
+                    },
+                    "source": {
+                        "species": "homo_sapiens",
+                        "id": "ENSG00000186868",
+                        "protein_id": "ENSP00000262410",
+                        "taxon_id": 9606,
+                        "cigar_line": "73M29D142M10D107M4D43MD47M2D128M2D293M",
+                        "perc_pos": 71.0684,
+                        "perc_id": 65.5462
+                    },
+                    "taxonomy_level": "Eutheria",
+                    "type": "ortholog_one2one"
+                }
+            ],
+            "id": "ENSG00000186868"
+        }
+    ]
+}

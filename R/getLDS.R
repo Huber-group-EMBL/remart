@@ -141,26 +141,22 @@ getLDS <- function(
     expand = FALSE
   )
 
-  missing_ids <- values[vapply(source_genes, is.null, logical(1))]
+  missing_ids <- values[lengths(source_genes[values]) == 0]
   if (length(missing_ids) > 0) {
     warning(
       "The following identifiers were not found and will be ignored: ",
       toString(missing_ids)
     )
   }
+  found_ids <- setdiff(values, missing_ids)
 
-  rows <- lapply(values, function(id) {
-    gene <- source_genes[[id]]
-    if (is.null(gene)) {
-      return(NULL)
-    }
-
-    homologies <- switch(
+  homologies_by_id <- lapply(found_ids, function(id) {
+    switch(
       filters,
       "ensembl_gene_id" = .remart_homologies_id(
         id,
         version = version,
-        species = gene$species,
+        species = source_genes[[id]]$species,
         target_species = speciesL
       ),
       "external_gene_name" = .remart_homologies_symbol(
@@ -170,18 +166,25 @@ getLDS <- function(
         target_species = speciesL
       )
     )
-    if (length(homologies) == 0) {
-      return(NULL)
-    }
+  }) |>
+    setNames(found_ids)
 
-    target_ids <- vapply(homologies, function(h) h$target$id, character(1))
-    target_genes <- .remart_lookup_id(
-      target_ids,
-      version = version,
-      expand = FALSE
-    )
+  # Single batched lookup for all target genes
+  target_ids <- homologies_by_id |>
+    unlist(recursive = FALSE) |>
+    vapply(function(h) h$target$id, character(1)) |>
+    unique()
 
-    lapply(homologies, function(h) {
+  target_genes <- if (length(target_ids) > 0) {
+    .remart_lookup_id(target_ids, version = version, expand = FALSE)
+  } else {
+    list()
+  }
+
+  rows <- lapply(found_ids, function(id) {
+    gene <- source_genes[[id]]
+
+    lapply(homologies_by_id[[id]], function(h) {
       target_gene <- target_genes[[h$target$id]]
 
       if (nzchar(filtersL)) {
@@ -201,7 +204,7 @@ getLDS <- function(
 
   df <- do.call(rbind, rows)
 
-  if (nrow(df) == 0) {
+  if (NROW(df) == 0) {
     # Empty df but with the expected columns.
     # Having a stable output format makes it easier to post-process.
     empty_df <- vector("list", length(attributes)) |>
