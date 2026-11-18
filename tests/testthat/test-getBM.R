@@ -235,3 +235,23 @@ test_that("getBM() returns an empty data frame when no ID is found", {
   expect_identical(nrow(res), 0L)
   expect_named(res, c("ensembl_gene_id", "external_gene_name"))
 })
+
+test_that("getBM() returns the expected BRAF annotation values from fixtures", {
+  res <- getBM(
+    attributes = c(
+      "ensembl_gene_id",
+      "external_gene_name",
+      "chromosome_name",
+      "strand"
+    ),
+    filters = "ensembl_gene_id",
+    values = "ENSG00000157764"
+  ) |>
+    expect_no_error() |>
+    expect_no_warning()
+
+  expect_identical(res$ensembl_gene_id, "ENSG00000157764")
+  expect_identical(res$external_gene_name, "BRAF")
+  expect_identical(res$chromosome_name, "7")
+  expect_identical(res$strand, -1L)
+})
