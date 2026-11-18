@@ -90,3 +90,10 @@ test_that("getSequence() fails with unsupported chromosome input", {
     "Not implemented yet"
   )
 })
+
+test_that("getSequence() errors when neither id nor chromosome is given", {
+  expect_error(
+    getSequence(seqType = "cdna", type = "ensembl_gene_id"),
+    "`id` must be provided"
+  )
+})
