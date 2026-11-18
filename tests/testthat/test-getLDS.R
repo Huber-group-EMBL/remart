@@ -167,3 +167,89 @@ test_that("getLDS() returns the expected mouse orthologue values from fixtures",
   expect_identical(res$ensembl_gene_id.1, "ENSMUSG00000002413")
   expect_identical(res$external_gene_name.1, "Braf")
 })
+
+test_that("getLDS() filtersL/valuesL keeps only matching orthologues", {
+  res_kept <- getLDS(
+    attributes = c("ensembl_gene_id", "external_gene_name"),
+    filters = "ensembl_gene_id",
+    values = "ENSG00000157764",
+    attributesL = c("ensembl_gene_id", "external_gene_name"),
+    filtersL = "external_gene_name",
+    valuesL = "Braf",
+    speciesL = "mouse",
+    version = "oct2024"
+  ) |>
+    expect_no_error()
+  expect_identical(res_kept$external_gene_name.1, "Braf")
+
+  res_dropped <- getLDS(
+    attributes = c("ensembl_gene_id", "external_gene_name"),
+    filters = "ensembl_gene_id",
+    values = "ENSG00000157764",
+    attributesL = c("ensembl_gene_id", "external_gene_name"),
+    filtersL = "external_gene_name",
+    valuesL = "NotAGene",
+    speciesL = "mouse",
+    version = "oct2024"
+  ) |>
+    expect_no_error()
+  expect_identical(nrow(res_dropped), 0L)
+  expect_named(
+    res_dropped,
+    c("ensembl_gene_id", "external_gene_name", "ensembl_gene_id.1", "external_gene_name.1")
+  )
+})
+
+test_that("getLDS() fails with a missing or empty speciesL", {
+  expect_error(
+    getLDS(
+      attributes = "ensembl_gene_id",
+      filters = "ensembl_gene_id",
+      values = "ENSG00000157764",
+      attributesL = "ensembl_gene_id",
+      version = "oct2024"
+    ),
+    "speciesL"
+  )
+  expect_error(
+    getLDS(
+      attributes = "ensembl_gene_id",
+      filters = "ensembl_gene_id",
+      values = "ENSG00000157764",
+      attributesL = "ensembl_gene_id",
+      speciesL = "",
+      version = "oct2024"
+    ),
+    "`speciesL`"
+  )
+})
+
+test_that("getLDS() fails with an unsupported filtersL", {
+  expect_error(
+    getLDS(
+      attributes = "ensembl_gene_id",
+      filters = "ensembl_gene_id",
+      values = "ENSG00000157764",
+      attributesL = "ensembl_gene_id",
+      filtersL = "not_an_attribute",
+      valuesL = "x",
+      speciesL = "mouse",
+      version = "oct2024"
+    ),
+    "filtersL must be"
+  )
+})
+
+test_that("getLDS() fails with transcript-level attributes", {
+  expect_error(
+    getLDS(
+      attributes = c("ensembl_gene_id", "ensembl_transcript_id"),
+      filters = "ensembl_gene_id",
+      values = "ENSG00000157764",
+      attributesL = "ensembl_gene_id",
+      speciesL = "mouse",
+      version = "oct2024"
+    ),
+    "Unsupported attribute\\(s\\): ensembl_transcript_id"
+  )
+})
