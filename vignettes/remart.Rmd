@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 )
 
 # Copied from testthat:::has_internet()
-ensembl_offline <- !is.null(curl::nslookup(
+ensembl_offline <- is.null(curl::nslookup(
   "rest.ensembl.org",
   error = FALSE
 ))
