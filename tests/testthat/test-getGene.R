@@ -83,3 +83,28 @@ test_that("getGene() fills unknown IDs with NA and warns once", {
     "not found"
   )
 })
+
+test_that(".remart_lookup_symbol() sends one request per lookup batch", {
+  symbols <- sprintf("GENE%d", seq_len(.remart_lookup_batch_size + 1L))
+  n_requests <- 0L
+  local_mocked_bindings(
+    .remart_lookup_batch_size = 1000L,
+    .package = "remart"
+  )
+  local_mocked_bindings(
+    req_perform = function(req, ...) {
+      n_requests <<- n_requests + 1L
+      stop("2nd batch reached")
+    },
+    .package = "httr2"
+  )
+  expect_error(
+    .remart_lookup_symbol(
+      symbols,
+      base_url = "https://rest.ensembl.org",
+      species = "human"
+    ),
+    "2nd batch reached"
+  )
+  expect_identical(n_requests, 1L)
+})
