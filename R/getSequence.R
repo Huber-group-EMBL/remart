@@ -99,18 +99,19 @@ getSequence <- function(
       call. = FALSE
     )
   }
-  if (!missing(id)) {
-    return(
-      .getSequenceFromId(
-        id = id,
-        type = type,
-        seqType = seqType,
-        upstream = upstream,
-        downstream = downstream,
-        version = version
-      )
-    )
+  if (missing(id)) {
+    stop("`id` must be provided, as sequences are currently retrieved by ID.")
   }
+  return(
+    .getSequenceFromId(
+      id = id,
+      type = type,
+      seqType = seqType,
+      upstream = upstream,
+      downstream = downstream,
+      version = version
+    )
+  )
 }
 
 .getSequenceFromId <- function(
@@ -161,5 +162,5 @@ getSequence <- function(
     httr2::resp_body_json(simplifyVector = TRUE)
 
   # The columns are seemingly returned in a random(?)/unstable order.
-  res <- res[sort(names(res), method = "radix")]
+  res[sort(names(res), method = "radix")]
 }
