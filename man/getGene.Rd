@@ -44,12 +44,12 @@ requested IDs:
 Retries gene annotation information from Ensembl.
 }
 \examples{
-\donttest{
 getGene(
   "ENSG00000157764",
   type = "ensembl_gene_id"
 )
 
+\donttest{
 ids <- c(
  "ENSG00000003987",
  "ENSG00000004939"
