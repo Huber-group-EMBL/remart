@@ -131,10 +131,11 @@ getBM <- function(
     attributes %notin% .listGeneLevelAttributes()
   )
 
+  base_url <- .construct_versioned_url(version)
   ids <- .remart_lookup(
     values = values,
     filters = filters,
-    version = version,
+    base_url = base_url,
     species = species,
     expand = has_transcript_attributes
   )
@@ -167,7 +168,7 @@ getBM <- function(
     needs_genes <- any(attributes %notin% transcript_level_attributes)
     gene_ids <- unique(unlist(lapply(ids, `[[`, "Parent")))
     genes <- if (needs_genes) {
-      .remart_lookup_id(gene_ids, version, expand = FALSE)
+      .remart_lookup_id(gene_ids, base_url = base_url, expand = FALSE)
     } else {
       list()
     }

@@ -162,10 +162,11 @@ getLDS <- function(
     stop("`values` must contain at least one identifier.")
   }
 
+  base_url <- .construct_versioned_url(version)
   source_genes <- .remart_lookup(
     values = values,
     filters = filters,
-    version = version,
+    base_url = base_url,
     species = species,
     expand = FALSE
   )
@@ -188,13 +189,13 @@ getLDS <- function(
       filters,
       "ensembl_gene_id" = .remart_homologies_id(
         id,
-        version = version,
+        base_url = base_url,
         species = gene$species,
         target_species = speciesL
       ),
       "external_gene_name" = .remart_homologies_symbol(
         id,
-        version = version,
+        base_url = base_url,
         species = species,
         target_species = speciesL
       )
@@ -206,7 +207,7 @@ getLDS <- function(
     target_ids <- vapply(homologies, function(h) h$target$id, character(1))
     target_genes <- .remart_lookup_id(
       target_ids,
-      version = version,
+      base_url = base_url,
       expand = FALSE
     )
 

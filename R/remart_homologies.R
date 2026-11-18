@@ -1,8 +1,8 @@
 #' Fetch orthologues of `id` in `target_species` from the REST `homology/id`
 #' endpoint
 #' @noRd
-.remart_homologies_id <- function(id, version = NULL, species, target_species) {
-  resp <- httr2::request(.construct_versioned_url(version)) |>
+.remart_homologies_id <- function(id, base_url, species, target_species) {
+  resp <- httr2::request(base_url) |>
     httr2::req_url_path(sprintf("/homology/id/%s/%s", species, id)) |>
     httr2::req_url_query(
       type = "orthologues",
@@ -18,11 +18,11 @@
 
 .remart_homologies_symbol <- function(
   symbol,
-  version = NULL,
+  base_url,
   species,
   target_species
 ) {
-  resp <- httr2::request(.construct_versioned_url(version)) |>
+  resp <- httr2::request(base_url) |>
     httr2::req_url_path(sprintf("/homology/symbol/%s/%s", species, symbol)) |>
     httr2::req_url_query(
       type = "orthologues",

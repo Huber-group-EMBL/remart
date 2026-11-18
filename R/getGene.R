@@ -59,7 +59,7 @@ getGene <- function(
   res <- .remart_lookup(
     values = id,
     filters = type,
-    version = version,
+    base_url = .construct_versioned_url(version),
     species = species,
     expand = FALSE
   )
