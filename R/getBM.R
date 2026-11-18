@@ -35,7 +35,6 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' attribs <- c("ensembl_gene_id", "external_gene_name", "chromosome_name")
 #' getBM(
 #'   attributes = attribs,
@@ -43,6 +42,7 @@
 #'   values = c("ENSG00000157764", "ENSG00000004939")
 #' )
 #'
+#' \donttest{
 #' # It is also possible to a gene symbol, but a species must be specified, as
 #' # gene symbols are not unique across species.
 #' getBM(

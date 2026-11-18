@@ -29,7 +29,6 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' getLDS(
 #'   attributes = c("ensembl_gene_id", "external_gene_name"),
 #'   filters = "ensembl_gene_id",
@@ -38,6 +37,7 @@
 #'   speciesL = "mouse"
 #' )
 #'
+#' \donttest{
 #' # It is also possible to a gene symbol, but a species must be specified, as
 #' # gene symbols are not unique across species.
 #' getLDS(

@@ -10,13 +10,13 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
 #' getSequence(
 #'   seqType = "gene_exon_intron",
 #'   type = "ensembl_gene_id",
 #'   id = "ENSG00000001497"
 #' )
 #'
+#' \donttest{
 #' ids <- c(
 #'  "ENSG00000003987",
 #'  "ENSG00000004939"
