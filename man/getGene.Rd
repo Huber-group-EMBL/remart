@@ -2,17 +2,16 @@
 % Please edit documentation in R/getGene.R
 \name{getGene}
 \alias{getGene}
-\title{Retries gene annotation information from Ensembl.}
+\title{Retrieves gene annotation information from Ensembl}
 \usage{
 getGene(id, type = "ensembl_gene_id", ..., version = NULL, species = NULL)
 }
 \arguments{
-\item{id}{vector of gene identifiers one wants to annotate}
+\item{id}{Character vector of gene identifiers to annotate.}
 
-\item{type}{type of identifier, possible values can be obtained by the
-listFilters function.  Examples are entrezgene_id, hgnc_symbol (for hugo
-gene symbol), ensembl_gene_id, unigene, agilentprobe, affy_hg_u133_plus_2,
-refseq_dna, etc.}
+\item{type}{Type of identifier given in \code{id}. Either \code{"ensembl_gene_id"}
+(the default) or \code{"external_gene_name"}; no other \code{biomaRt} identifier
+types are supported.}
 
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
 \code{mart} from \pkg{biomaRt} functions.}
@@ -41,7 +40,7 @@ requested IDs:
 }
 }
 \description{
-Retries gene annotation information from Ensembl.
+Retrieves gene annotation information from Ensembl
 }
 \examples{
 getGene(

@@ -18,21 +18,25 @@ getLDS(
 )
 }
 \arguments{
-\item{attributes}{Attributes you want to retrieve of primary dataset.  A
-possible list of attributes can be retrieved using the function
-\code{\link[biomaRt:listAttributes]{listAttributes()}}.}
+\item{attributes}{Character vector of gene-level attributes to retrieve for
+the source species. See the \emph{Details} section for the supported
+attributes.}
 
-\item{filters}{Filters that should be used in the query. These filters will
-be applied to primary dataset.  A possible list of filters can be retrieved
-using the function \code{\link[biomaRt:listFilters]{listFilters()}}.}
+\item{filters}{A single filter to use in the query for the source species.
+Only \code{"ensembl_gene_id"} and \code{"external_gene_name"} are supported.}
 
-\item{values}{Values of the filter, e.g. list of affy IDs}
+\item{values}{Values of \code{filters}, e.g. a character vector of Ensembl gene
+IDs.}
 
-\item{attributesL}{Attributes of linked dataset that needs to be retrieved}
+\item{attributesL}{Character vector of gene-level attributes to retrieve for
+the target species, drawn from the same set as \code{attributes}.}
 
-\item{filtersL}{Filters to be applied to the linked dataset}
+\item{filtersL}{Either \code{""} (the default, no filtering) or a single
+attribute supported by \code{attributesL} to filter the target-species genes
+on.}
 
-\item{valuesL}{Values for the linked dataset filters}
+\item{valuesL}{Values of \code{filtersL}, i.e. the target-species values to keep.
+Only used when \code{filtersL} is not the empty string.}
 
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
 \code{mart}, \code{martL}, \code{verbose}, \code{uniqueRows} and \code{bmHeader} from
@@ -54,8 +58,26 @@ needed, but the species of the linked dataset can not be inferred from
 \code{attributesL}/\code{filtersL}/\code{valuesL} alone.}
 }
 \value{
-A data frame containing source-species and target-species
-ortholog annotations.
+A \code{data.frame} containing one row per source gene and target gene
+combination. It has the following columns:
+\itemize{
+\item the columns requested in \code{attributes}, in that order, describing the
+source-species gene,
+\item the columns requested in \code{attributesL}, in that order, describing the
+target-species gene.
+}
+
+Attributes requested in both \code{attributes} and \code{attributesL} have the same
+name twice, so the target-species copies get a numeric suffix added by
+\code{data.frame()}: with
+\code{attributes = c("ensembl_gene_id", "external_gene_name")} and
+\code{attributesL = c("ensembl_gene_id", "external_gene_name")}, the columns are
+\code{ensembl_gene_id}, \code{external_gene_name}, \code{ensembl_gene_id.1} and
+\code{external_gene_name.1}. Source genes with several orthologues in the target
+species therefore appear on several rows.
+
+If no match is found, an empty data frame with the source-species columns
+only is returned.
 }
 \description{
 Retrieve orthologous gene annotations across two species
@@ -70,7 +92,7 @@ Supported filters/attributes (for both \code{filters}/\code{attributes} and
 \code{external_gene_name}, \code{description}, \code{chromosome_name},
 \code{start_position}, \code{end_position}, \code{strand}, \code{gene_biotype}.
 
-Only \code{"ensembl_gene_id"} and \code{"external_gene_name"} are supported for \code{filter}.
+Only \code{"ensembl_gene_id"} and \code{"external_gene_name"} are supported for \code{filters}.
 }
 \examples{
 getLDS(

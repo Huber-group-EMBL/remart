@@ -1,6 +1,9 @@
-#' Retries gene annotation information from Ensembl.
+#' Retrieves gene annotation information from Ensembl
 #'
-#' @inheritParams biomaRt::getGene
+#' @param id Character vector of gene identifiers to annotate.
+#' @param type Type of identifier given in `id`. Either `"ensembl_gene_id"`
+#'   (the default) or `"external_gene_name"`; no other `biomaRt` identifier
+#'   types are supported.
 #' @param ... Ignored. Used to catch no longer necessary parameters such as
 #'   `mart` from \pkg{biomaRt} functions.
 #' @inheritParams getBM species version

@@ -1,11 +1,54 @@
 #' Get Sequences from Ensembl
 #'
-#' @inheritParams biomaRt::getSequence
-#' @inheritParams getGene
+#' @param chromosome,start,end Genomic coordinates to retrieve a sequence
+#'   from. Not supported yet: supplying `chromosome` currently stops with an
+#'   error, so sequences must be requested by `id`.
+#' @param id An identifier or vector of identifiers, of the kind given in
+#'   `type`.
+#' @param type The type of identifier given in `id`. Supported types are
+#'   `"ensembl_gene_id"`, `"ensembl_transcript_id"` and
+#'   `"ensembl_peptide_id"`.
+#' @param seqType Type of sequence to retrieve. One of
+#'   `"gene_exon_intron"`, `"cdna"` or `"peptide"`.
+#' @param upstream,downstream Number of base pairs of upstream
+#'   (`upstream`) or downstream (`downstream`) sequence to add to the output.
+#' @param ... Ignored. Used to catch no longer necessary parameters such as
+#'   `mart`, `useCache` and `verbose` from \pkg{biomaRt} functions.
 #' @inheritParams getBM version
 #'
-#' @returns A data frame containing the requested sequences and their
-#'   associated metadata.
+#' @details
+#' Sequences are retrieved from the Ensembl REST `sequence/id` endpoint, rather
+#' than from a BioMart dataset. This has two consequences: only Ensembl stable
+#' IDs can be used to identify features, and genomic coordinates
+#' (`chromosome`/`start`/`end`) are not supported yet. Supplying `chromosome`
+#' stops with an error; use `biomaRt::getSequence()` if you need it.
+#'
+#' `type` must be one of:
+#'   - `"ensembl_gene_id"`: retrieve the sequence(s) associated with a gene ID,
+#'   - `"ensembl_transcript_id"`: retrieve the sequence of a transcript ID,
+#'   - `"ensembl_peptide_id"`: retrieve the sequence of a peptide ID.
+#'
+#' `seqType` must be one of:
+#'   - `"gene_exon_intron"`: the genomic sequence, introns included
+#'     (`molecule` is `"dna"`),
+#'   - `"cdna"`: the cDNA sequence, i.e. the exons spliced together
+#'     (`molecule` is `"dna"`),
+#'   - `"peptide"`: the protein sequence (`molecule` is `"protein"`).
+#'
+#' @returns A data frame with one row per returned sequence, and the following
+#'   columns:
+#'   - `query`: the identifier that was requested, as given in `id`,
+#'   - `id`: the Ensembl stable ID of the sequence that was returned (e.g. the
+#'     peptide ID when `type = "ensembl_gene_id"` and `seqType = "peptide"`),
+#'   - `seq`: the sequence itself, as a single string,
+#'   - `desc`: the description of the feature, typically its genomic location
+#'     (e.g. `"chromosome:GRCh38:7:140719327:140925199:-1"`), `NA` when Ensembl
+#'     does not provide one,
+#'   - `molecule`: `"dna"` or `"protein"`, depending on `seqType`,
+#'   - `version`: the version of the returned sequence.
+#'
+#'   Columns are sorted alphabetically. That order is not part of the API, so
+#'   select columns by name.
 #'
 #' @export
 #'
@@ -48,7 +91,13 @@ getSequence <- function(
   version = NULL
 ) {
   if (!missing(chromosome)) {
-    stop("Not implemented yet")
+    stop(
+      "Not implemented yet. ",
+      "Please request it by opening an issue at ",
+      "https://github.com/Huber-group-EMBL/remart/issues. ",
+      "For now, please use biomaRt::getSequence().",
+      call. = FALSE
+    )
   }
   if (!missing(id)) {
     return(
