@@ -48,6 +48,26 @@ All annotation and sequence examples in this vignette query live Ensembl
 services. They require an internet connection, and results can change as Ensembl
 releases and annotations are updated.
 
+Although they are different approaches and interface, there is some overlap in
+functionality between `r BiocStyle::Biocpkg("remart")` and 
+`r BiocStyle::Biocpkg("ensembldb")`.
+`EnsDb` objects from `r BiocStyle::Biocpkg("ensembldb")`, available through 
+`r BiocStyle::Biocpkg("AnnotationHub")`, give offline, release-pinned access to
+gene, transcript and protein annotation, and they do not depend on the
+availability of a web service at analysis time.
+
+Beyond subjective preferences about interface, `r BiocStyle::Biocpkg("remart")`
+is mainly useful when:
+
+- existing code written against `r BiocStyle::Biocpkg("biomaRt")` should keep
+  working with minimal changes,
+- orthologue queries are needed, through the Ensembl homology endpoint,
+
+Finally, `r BiocStyle::Biocpkg("remart")` and `r BiocStyle::Biocpkg("ensembldb")`
+rely on different Ensembl APIs, which might have availability issues at 
+different times. The option to use both packages in a complementary manner can
+help mitigate such issues.
+
 # Installation and loading
 
 You can install remart from Bioconductor (after acceptance and release):
