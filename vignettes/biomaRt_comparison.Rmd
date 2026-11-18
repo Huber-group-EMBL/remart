@@ -10,7 +10,10 @@ output:
   BiocStyle::html_document
 ---
 
-```{r, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -28,3 +31,11 @@ In biomaRt, the `mart` argument was used to specify the database to connect to, 
 ### New `version` argument
 
 In biomaRt, the Ensembl version to query could be specified with the `version` argument (or directly in the `host` argument) in `useEnsembl()`. In remart, the `version` argument is now available in all functions that query Ensembl, and it is used to specify the Ensembl release to query. If not specified, the latest release will be used.
+
+## Session info
+
+```{r}
+#| label: session-info
+
+sessionInfo()
+```
