@@ -13,11 +13,16 @@ output:
 ## Function names, signatures, and return values
 
 The function names, arguments, and return values come from the biomaRt package,
-as this package is aiming to be a drop-in replacement for biomaRt.
+as this package is aiming to offer a familiar interface for biomaRt users.
 
 Some arguments are no longer required, and are subsumed into the ellipsis
 (`...`) argument. For example, the `mart` argument is no longer required, as the
 connection to the database is handled internally by the package.
+
+Some new arguments are required and need to be named explicitly. This prevents
+values previously passed to deprecated biomaRt arguments from being
+accidentally used. From an implementation perspective, these new arguments are
+listed after the ellipsis (`...`) argument.
 
 ## FAQ
 
@@ -33,5 +38,5 @@ Two main reasons:
     remart is only providing access to Ensembl.
 
 There is thus value in keeping the biomaRt package alive to address more complex
-edge cases, and external Mart databases, while remart can provide a drop-in
-replacement for newer Ensembl releases.
+edge cases, and external Mart databases, while remart can provide a replacement
+with a familiar interface for newer Ensembl releases.

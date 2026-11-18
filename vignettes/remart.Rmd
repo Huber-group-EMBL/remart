@@ -28,9 +28,10 @@ ensembl_offline <- !is.null(curl::nslookup(
 
 # Overview
 
-The `r BiocStyle::Biocpkg("remart")` package provides a drop-in replacement for
-`r BiocStyle::Biocpkg("biomaRt")` workflows. It keeps familiar function names
-and signatures while replacing the BioMart backend with the Ensembl REST API.
+The `r BiocStyle::Biocpkg("remart")` package provides a possible replacement
+for `r BiocStyle::Biocpkg("biomaRt")` workflows. It keeps familiar function
+names and signatures while replacing the BioMart backend with the Ensembl REST
+API.
 
 `r BiocStyle::Biocpkg("remart")` is not (yet?) a complete implementation of the
 BioMart query language. It currently supports a focused set of gene and

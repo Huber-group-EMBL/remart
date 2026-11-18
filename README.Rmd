@@ -22,7 +22,9 @@ knitr::opts_chunk$set(
 The remart package is a reimplementation of the biomaRt package, using the same interface, but with a different backend under the hood.
 Indeed, the biomaRt package relies on the biomart online utility. But this utility is no longer maintained and is likely to be retired soon.
 
-This package aims to offer a drop-in replacement using the more modern and better maintained APIs provided by Ensembl.
+This package aims to offer a familiar interface to biomaRt but with a more modern and better maintained backend, through the REST API provided by Ensembl.
+
+**Note that all biomaRt functionality is not yet implemented in remart. Only a subset of commonly used functions and queries are currently supported. After the first release, a co-creation process with the user community will guide further development.**
 
 ## Installation
 

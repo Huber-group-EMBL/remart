@@ -1,14 +1,14 @@
 Package: remart
-Title: Reimplementation of the 'biomaRt' Package Using Modern Ensembl APIs
+Title: Partial Reimplementation of the 'biomaRt' Package Using Modern Ensembl APIs
 Version: 0.99.6
 Authors@R: c(
     person("Hugo", "Gruson", , "hugo.gruson@embl.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4094-1476")),
     person("German Network for Bioinformatics Infrastructure - de.NBI", role = "fnd")
   )
-Description: This package aims to offer a drop-in replacement to biomaRt
-    using the same interface but the more modern and better maintained
-    APIs provided by Ensembl. It provides an easy solution for compatibility
+Description: This package aims to offer a familiar interface to biomaRt
+    but with a more modern and better maintained backend, through the REST
+    API provided by Ensembl. It provides an easy solution for compatibility
     with minimal changes for existing projects and packages. New projects
     may prefer to use another approach which is not constrained by the need
     for backward compatibility with biomaRt.
@@ -30,7 +30,7 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
