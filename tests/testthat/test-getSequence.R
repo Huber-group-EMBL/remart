@@ -76,3 +76,17 @@ test_that("getSequence() fails with unsupported inputs", {
     "Invalid seqType"
   )
 })
+
+test_that("getSequence() fails with unsupported chromosome input", {
+  expect_error(
+    getSequence(
+      chromosome = "7",
+      start = 140719327,
+      end = 140925199,
+      seqType = "gene_exon_intron",
+      type = "ensembl_gene_id",
+      id = "ENSG00000157764"
+    ),
+    "Not implemented yet"
+  )
+})
