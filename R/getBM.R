@@ -184,7 +184,7 @@ getBM <- function(
 
   df <- do.call(rbind, rows)
 
-  if (nrow(df) == 0) {
+  if (NROW(df) == 0) {
     # Empty df but with the expected columns.
     # Having a stable output format makes it easier to post-process.
     empty_df <- vector("list", length(attributes)) |>
