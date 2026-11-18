@@ -88,8 +88,7 @@ library(remart)
 listAttributes()
 ```
 
-The supported filters for `getBM()` are currently limited to `ensembl_gene_id`
-and `ensembl_transcript_id`, and only one filter can be used per call.
+The supported filters for `getBM()` are currently limited to `ensembl_gene_id`, `ensembl_transcript_id` and `external_gene_name`, and only one filter can be used per call.
 
 # Retrieve gene annotations
 
@@ -247,7 +246,7 @@ orthologues <- getLDS(
 orthologues
 ```
 
-Only `ensembl_gene_id` is currently supported as the source filter. Source and
+Only `ensembl_gene_id` and `external_gene_name` are currently supported as the source filter. Source and
 target attributes are gene-level attributes; transcript-level linked queries are
 not yet supported.
 
