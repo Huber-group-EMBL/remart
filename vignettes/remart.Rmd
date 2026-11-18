@@ -50,13 +50,23 @@ releases and annotations are updated.
 
 # Installation and loading
 
-The development version can be installed from GitHub with:
+You can install remart from Bioconductor (after acceptance and release):
 
 ```{r}
 #| label: install
 #| eval: false
 
-pak::pak("Huber-group-EMBL/remart")
+BiocManager::install("remart")
+```
+
+
+The development version can be installed from GitHub with:
+
+```{r}
+#| label: install-github
+#| eval: false
+
+BiocManager::install("Huber-group-EMBL/remart")
 ```
 
 Load the package in an R session with:

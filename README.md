@@ -24,10 +24,16 @@ community will guide further development.**
 
 ## Installation
 
-You can install the development version of remart like so:
+You can install remart from Bioconductor (after acceptance and release):
 
 ``` r
-pak::pak("Huber-group-EMBL/remart")
+BiocManager::install("remart")
+```
+
+The development version can be installed from GitHub with:
+
+``` r
+BiocManager::install("Huber-group-EMBL/remart")
 ```
 
 ## Example
