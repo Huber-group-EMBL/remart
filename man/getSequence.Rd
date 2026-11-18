@@ -94,8 +94,8 @@ getSequence(
 
 \donttest{
 ids <- c(
- "ENSG00000003987",
- "ENSG00000004939"
+  "ENSG00000003987",
+  "ENSG00000004939"
 )
 getSequence(
   seqType = "gene_exon_intron",

@@ -27,16 +27,18 @@ provided explicitly.}
 }
 \value{
 A data frame containing the following gene annotations for the
-requested IDs:
+requested IDs that returned results:
 \itemize{
 \item \code{ensembl_gene_id}
 \item \code{hgnc_symbol}
 \item \code{description}
 \item \code{chromosome_name}
-\item \code{band} (not available from Ensembl REST API, will be filled with NA)
+\item \code{band} (not available from Ensembl REST API, filled with NA)
 \item \code{strand}
 \item \code{start_position}
 \item \code{end_position}
+IDs that didn't return results are not be included in the data frame,
+and a warning listing them is issued.
 }
 }
 \description{
