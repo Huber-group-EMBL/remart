@@ -185,9 +185,42 @@ test_that("getBM() fails with unsupported input", {
   )
 })
 
+test_that("getBM() warns for unknown IDs and keeps rows for valid ones", {
+  fake_gene <- list(
+    id = "ENSG00000000001",
+    display_name = "GENE1",
+    description = "desc",
+    seq_region_name = "1",
+    start = 1L,
+    end = 10L,
+    strand = 1L,
+    biotype = "protein_coding",
+    version = 1L
+  )
+  local_mocked_bindings(
+    .remart_lookup = function(values, ...) {
+      setNames(list(fake_gene, NULL), values)
+    },
+    .package = "remart"
+  )
+  expect_warning(
+    res <- getBM(
+      attributes = c("ensembl_gene_id", "external_gene_name"),
+      filters = "ensembl_gene_id",
+      values = c("ENSG00000000001", "ENSG00000000002")
+    ),
+    "ENSG00000000002"
+  )
+  expect_identical(nrow(res), 1L)
+  expect_identical(res$ensembl_gene_id, "ENSG00000000001")
+  expect_identical(res$external_gene_name, "GENE1")
+})
+
 test_that("getBM() returns an empty data frame when no ID is found", {
   local_mocked_bindings(
-    .remart_lookup = function(values, ...) setNames(rep(list(NULL), length(values)), values),
+    .remart_lookup = function(values, ...) {
+      setNames(rep(list(NULL), length(values)), values)
+    },
     .package = "remart"
   )
   expect_warning(

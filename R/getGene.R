@@ -89,6 +89,19 @@ getGene <- function(
   }) |>
     do.call(rbind, args = _)
 
+  if (NROW(df) == 0L) {
+    df <- data.frame(
+      ensembl_gene_id = character(),
+      hgnc_symbol = character(),
+      description = character(),
+      chromosome_name = character(),
+      band = character(),
+      strand = integer(),
+      start_position = integer(),
+      end_position = integer()
+    )
+  }
+
   rownames(df) <- NULL
 
   return(df)

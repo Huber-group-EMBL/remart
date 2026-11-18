@@ -71,19 +71,6 @@ test_that("getGene() fails with unsupported ID types", {
   )
 })
 
-test_that("getGene() fills unknown IDs with NA and warns once", {
-  local_mocked_bindings(
-    .remart_lookup = function(values, ...) {
-      setNames(list(NULL, NULL), values)
-    },
-    .package = "remart"
-  )
-  expect_warning(
-    res <- getGene(id = c("ENSG00000000001", "ENSG00000000002")),
-    "not found"
-  )
-})
-
 test_that(".remart_lookup_symbol() sends one request per lookup batch", {
   symbols <- sprintf("GENE%d", seq_len(.remart_lookup_batch_size + 1L))
   n_requests <- 0L
@@ -107,4 +94,60 @@ test_that(".remart_lookup_symbol() sends one request per lookup batch", {
     "2nd batch reached"
   )
   expect_identical(n_requests, 1L)
+})
+
+fake_gene_lookup <- list(
+  id = "ENSG00000000001",
+  display_name = "GENE1",
+  description = "desc",
+  seq_region_name = "1",
+  start = 1L,
+  end = 10L,
+  strand = 1L,
+  biotype = "protein_coding",
+  version = 1L
+)
+
+test_that("getGene() warns for unknown IDs and keeps rows for valid ones", {
+  local_mocked_bindings(
+    .remart_lookup = function(values, ...) {
+      setNames(list(fake_gene_lookup, NULL), values)
+    },
+    .package = "remart"
+  )
+  expect_warning(
+    res <- getGene(id = c("ENSG00000000001", "ENSG00000000002")),
+    "ENSG00000000002"
+  )
+  expect_identical(nrow(res), 1L)
+  expect_identical(res$ensembl_gene_id, "ENSG00000000001")
+  expect_identical(res$hgnc_symbol, "GENE1")
+})
+
+test_that("getGene() returns an empty data frame for all unknown IDs", {
+  local_mocked_bindings(
+    .remart_lookup = function(values, ...) {
+      setNames(list(NULL, NULL), values)
+    },
+    .package = "remart"
+  )
+  expect_warning(
+    res <- getGene(id = c("ENSG00000000001", "ENSG00000000002")),
+    "not found"
+  )
+  expect_s3_class(res, "data.frame")
+  expect_identical(nrow(res), 0L)
+  expect_named(
+    res,
+    c(
+      "ensembl_gene_id",
+      "hgnc_symbol",
+      "description",
+      "chromosome_name",
+      "band",
+      "strand",
+      "start_position",
+      "end_position"
+    )
+  )
 })
