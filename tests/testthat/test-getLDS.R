@@ -196,7 +196,12 @@ test_that("getLDS() filtersL/valuesL keeps only matching orthologues", {
   expect_identical(nrow(res_dropped), 0L)
   expect_named(
     res_dropped,
-    c("ensembl_gene_id", "external_gene_name", "ensembl_gene_id.1", "external_gene_name.1")
+    c(
+      "ensembl_gene_id",
+      "external_gene_name",
+      "ensembl_gene_id.1",
+      "external_gene_name.1"
+    )
   )
 })
 
@@ -220,7 +225,7 @@ test_that("getLDS() fails with a missing or empty speciesL", {
       speciesL = "",
       version = "oct2024"
     ),
-    "`speciesL`"
+    "speciesL"
   )
 })
 
