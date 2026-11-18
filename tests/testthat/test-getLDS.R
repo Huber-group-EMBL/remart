@@ -149,3 +149,21 @@ test_that("getLDS() keeps the orthologue when filtersL matches", {
   expect_identical(res$ensembl_gene_id.1, "ENSMUSG00000000002")
   expect_identical(res$external_gene_name.1, "Tgt")
 })
+
+test_that("getLDS() returns the expected mouse orthologue values from fixtures", {
+  res <- getLDS(
+    attributes = c("ensembl_gene_id", "external_gene_name"),
+    filters = "ensembl_gene_id",
+    values = "ENSG00000157764",
+    attributesL = c("ensembl_gene_id", "external_gene_name"),
+    speciesL = "mouse",
+    version = "oct2024"
+  ) |>
+    expect_no_error() |>
+    expect_no_warning()
+
+  expect_identical(nrow(res), 1L)
+  expect_identical(res$ensembl_gene_id, "ENSG00000157764")
+  expect_identical(res$ensembl_gene_id.1, "ENSMUSG00000002413")
+  expect_identical(res$external_gene_name.1, "Braf")
+})
