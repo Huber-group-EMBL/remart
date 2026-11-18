@@ -97,3 +97,52 @@ test_that("getSequence() errors when neither id nor chromosome is given", {
     "`id` must be provided"
   )
 })
+
+test_that("getSequence() upstream/downstream extends the sequence by the requested bp", {
+  base <- getSequence(
+    seqType = "gene_exon_intron",
+    type = "ensembl_gene_id",
+    id = "ENSG00000157764",
+    version = "oct2024"
+  ) |>
+    expect_no_error()
+  extended <- getSequence(
+    seqType = "gene_exon_intron",
+    type = "ensembl_gene_id",
+    id = "ENSG00000157764",
+    upstream = 200,
+    downstream = 200,
+    version = "oct2024"
+  ) |>
+    expect_no_error()
+  expect_identical(nchar(extended$seq), nchar(base$seq) + 400L)
+  expect_identical(
+    substr(extended$seq, 201, nchar(extended$seq) - 200),
+    base$seq
+  )
+})
+
+test_that("getSequence() supports seqType = 'cdna'", {
+  res <- getSequence(
+    seqType = "cdna",
+    type = "ensembl_gene_id",
+    id = "ENSG00000157764",
+    version = "oct2024"
+  ) |>
+    expect_no_error()
+  expect_true(all(res$query == "ENSG00000157764"))
+  expect_true(all(nzchar(res$seq)))
+  expect_true(all(startsWith(res$id, "ENST")))
+})
+
+test_that("getSequence() with duplicated IDs returns one row per input", {
+  res <- getSequence(
+    seqType = "gene_exon_intron",
+    type = "ensembl_gene_id",
+    id = c("ENSG00000157764", "ENSG00000157764"),
+    version = "oct2024"
+  ) |>
+    expect_no_error()
+  expect_identical(nrow(res), 2L)
+  expect_identical(res$query, c("ENSG00000157764", "ENSG00000157764"))
+})
