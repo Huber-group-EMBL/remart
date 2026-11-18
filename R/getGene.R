@@ -9,15 +9,17 @@
 #' @inheritParams getBM species version
 #'
 #' @returns A data frame containing the following gene annotations for the
-#'   requested IDs:
+#'   requested IDs that returned results:
 #'   - `ensembl_gene_id`
 #'   - `hgnc_symbol`
 #'   - `description`
 #'   - `chromosome_name`
-#'   - `band` (not available from Ensembl REST API, will be filled with NA)
+#'   - `band` (not available from Ensembl REST API, filled with NA)
 #'   - `strand`
 #'   - `start_position`
 #'   - `end_position`
+#' IDs that didn't return results are not be included in the data frame,
+#' and a warning listing them is issued.
 #'
 #' @export
 #'
@@ -64,11 +66,16 @@ getGene <- function(
     expand = FALSE
   )
 
-  warning(
-    "'band' column information is not available from the Ensembl REST API, ",
-    "it will be filled with NA values."
-  )
-  df <- lapply(res, function(x) {
+  was_not_found <- lengths(res) == 0L
+  if (any(was_not_found)) {
+    missing_ids <- id[was_not_found]
+    warning(
+      "The following identifiers were not found: ",
+      toString(missing_ids),
+      call. = FALSE
+    )
+  }
+  df <- lapply(res[!was_not_found], function(x) {
     data.frame(
       ensembl_gene_id = x$id,
       hgnc_symbol = x$display_name,
