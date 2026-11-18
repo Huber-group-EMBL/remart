@@ -61,8 +61,8 @@
 #'
 #' \donttest{
 #' ids <- c(
-#'  "ENSG00000003987",
-#'  "ENSG00000004939"
+#'   "ENSG00000003987",
+#'   "ENSG00000004939"
 #' )
 #' getSequence(
 #'   seqType = "gene_exon_intron",
@@ -128,21 +128,17 @@ getSequence <- function(
   ) {
     stop("Only Ensembl IDs (ENS...) are supported at the moment")
   }
-  if (!is.list(id) && length(id) == 1) {
-    id <- list(id)
-  }
+  ids <- unlist(id)
 
-  req <- list(
-    ids = id
-  )
+  req_extra <- list()
   if (!missing(upstream)) {
-    req$expand_5prime <- upstream
+    req_extra$expand_5prime <- upstream
   }
   if (!missing(downstream)) {
-    req$expand_3prime <- downstream
+    req_extra$expand_3prime <- downstream
   }
 
-  req$type <- switch(
+  type <- switch(
     seqType,
     "gene_exon_intron" = "genomic",
     "cdna" = "cdna",
@@ -153,14 +149,27 @@ getSequence <- function(
     )
   )
 
-  res <- httr2::request(.construct_versioned_url(version)) |>
-    httr2::req_url_path("/sequence/id") |>
-    httr2::req_method("POST") |>
-    httr2::req_user_agent(REMART_USER_AGENT) |>
-    httr2::req_body_json(req) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(simplifyVector = TRUE)
+  url <- .construct_versioned_url(version)
+  res <- lapply(
+    .remart_batches(ids, .remart_sequence_batch_size),
+    function(batch) {
+      req <- c(list(ids = as.list(batch), type = type), req_extra)
+      httr2::request(url) |>
+        httr2::req_url_path("/sequence/id") |>
+        httr2::req_method("POST") |>
+        httr2::req_user_agent(REMART_USER_AGENT) |>
+        httr2::req_body_json(req) |>
+        httr2::req_perform() |>
+        httr2::resp_body_json(simplifyVector = TRUE)
+    }
+  ) |>
+    unname() |>
+    do.call(rbind, args = _)
 
   # The columns are seemingly returned in a random(?)/unstable order.
   res[sort(names(res), method = "radix")]
 }
+
+# Maximum number of IDs Ensembl accepts in a single sequence/id POST body
+# (see https://rest.ensembl.org/documentation/info/sequence_id_post).
+.remart_sequence_batch_size <- 50L

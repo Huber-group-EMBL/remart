@@ -38,17 +38,35 @@
   )
 }
 
+# Maximum number of IDs Ensembl accepts in a single lookup POST body
+# (see https://rest.ensembl.org/documentation/info/lookup_post). Also used
+# for lookup/symbol.
+.remart_lookup_batch_size <- 1000L
+
+#' Split a vector into consecutive batches of at most `size` elements
+#' @noRd
+.remart_batches <- function(x, size) {
+  unname(split(x, ceiling(seq_along(x) / size)))
+}
+
 .remart_lookup_id <- function(ids, base_url, expand = FALSE) {
-  res <- httr2::request(base_url) |>
-    httr2::req_url_path("/lookup/id") |>
-    httr2::req_method("POST") |>
-    httr2::req_user_agent(REMART_USER_AGENT) |>
-    httr2::req_body_json(list(
-      ids = as.list(ids),
-      expand = as.integer(expand)
-    )) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(simplifyVector = FALSE)
+  unique_ids <- unique(ids)
+  res <- lapply(
+    .remart_batches(unique_ids, .remart_lookup_batch_size),
+    function(batch) {
+      httr2::request(base_url) |>
+        httr2::req_url_path("/lookup/id") |>
+        httr2::req_method("POST") |>
+        httr2::req_user_agent(REMART_USER_AGENT) |>
+        httr2::req_body_json(list(
+          ids = as.list(batch),
+          expand = as.integer(expand)
+        )) |>
+        httr2::req_perform() |>
+        httr2::resp_body_json(simplifyVector = FALSE)
+    }
+  ) |>
+    do.call(c, args = _)
 
   # Ensure every requested id has an (possibly NULL) entry, and that the
   # result is returned in the same order as `ids`.
@@ -61,17 +79,24 @@
   species = NULL,
   expand = FALSE
 ) {
-  res <- httr2::request(base_url) |>
-    httr2::req_url_path("/lookup/symbol") |>
-    httr2::req_url_path_append(species) |>
-    httr2::req_method("POST") |>
-    httr2::req_user_agent(REMART_USER_AGENT) |>
-    httr2::req_body_json(list(
-      symbols = as.list(symbols),
-      expand = as.integer(expand)
-    )) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(simplifyVector = FALSE)
+  unique_symbols <- unique(symbols)
+  res <- lapply(
+    .remart_batches(unique_symbols, .remart_lookup_batch_size),
+    function(batch) {
+      httr2::request(base_url) |>
+        httr2::req_url_path("/lookup/symbol") |>
+        httr2::req_url_path_append(species) |>
+        httr2::req_method("POST") |>
+        httr2::req_user_agent(REMART_USER_AGENT) |>
+        httr2::req_body_json(list(
+          symbols = as.list(batch),
+          expand = as.integer(expand)
+        )) |>
+        httr2::req_perform() |>
+        httr2::resp_body_json(simplifyVector = FALSE)
+    }
+  ) |>
+    do.call(c, args = _)
 
   res[symbols]
 }
