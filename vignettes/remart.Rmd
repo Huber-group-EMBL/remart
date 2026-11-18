@@ -307,6 +307,11 @@ visibility on how `r BiocStyle::Biocpkg("biomaRt")` is currently used in
 workflows in production. If you have a specific use case that is not currently
 supported, please open an issue on GitHub.
 
+After initial release, feature development will be prioritized (in order) based on:
+
+- Explicit feature requests from users in the [Bioconductor support forum](https://support.bioconductor.org/) and [GitHub issues](https://github.com/Huber-group-EMBL/remart/issues).
+- Use cases in Bioconductor package currently using biomaRt, ordered by their number of monthly downloads.
+
 # Session information
 
 ```{r}
