@@ -184,3 +184,21 @@ test_that("getBM() fails with unsupported input", {
     "The `species` argument must be provided when using filters other than"
   )
 })
+
+test_that("getBM() returns an empty data frame when no ID is found", {
+  local_mocked_bindings(
+    .remart_lookup = function(values, ...) setNames(rep(list(NULL), length(values)), values),
+    .package = "remart"
+  )
+  expect_warning(
+    res <- getBM(
+      attributes = c("ensembl_gene_id", "external_gene_name"),
+      filters = "ensembl_gene_id",
+      values = c("ENSG00000000001", "ENSG00000000002")
+    ),
+    "were not found"
+  )
+  expect_s3_class(res, "data.frame")
+  expect_identical(nrow(res), 0L)
+  expect_named(res, c("ensembl_gene_id", "external_gene_name"))
+})

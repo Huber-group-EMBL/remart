@@ -76,8 +76,8 @@ name twice, so the target-species copies get a numeric suffix added by
 \code{external_gene_name.1}. Source genes with several orthologues in the target
 species therefore appear on several rows.
 
-If no match is found, an empty data frame with the source-species columns
-only is returned.
+If no match is found, an empty data frame with the same columns as a
+non-empty result is returned.
 }
 \description{
 Retrieve orthologous gene annotations across two species

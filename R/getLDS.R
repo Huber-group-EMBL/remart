@@ -52,8 +52,8 @@
 #'   `external_gene_name.1`. Source genes with several orthologues in the target
 #'   species therefore appear on several rows.
 #'
-#'   If no match is found, an empty data frame with the source-species columns
-#'   only is returned.
+#'   If no match is found, an empty data frame with the same columns as a
+#'   non-empty result is returned.
 #'
 #' @export
 #'
@@ -231,11 +231,12 @@ getLDS <- function(
 
   df <- do.call(rbind, rows)
 
-  if (nrow(df) == 0) {
-    # Empty df but with the expected columns.
+  if (NROW(df) == 0) {
+    # Empty df but with the expected columns, named as in a non-empty result.
     # Having a stable output format makes it easier to post-process.
-    empty_df <- vector("list", length(attributes)) |>
-      setNames(attributes) |>
+    col_names <- make.names(c(attributes, attributesL), unique = TRUE)
+    empty_df <- vector("list", length(col_names)) |>
+      setNames(col_names) |>
       list2DF()
     return(empty_df)
   }
