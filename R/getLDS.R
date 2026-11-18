@@ -1,6 +1,19 @@
 #' Retrieve orthologous gene annotations across two species
 #'
-#' @inheritParams biomaRt::getLDS
+#' @param attributes Character vector of gene-level attributes to retrieve for
+#'   the source species. See the *Details* section for the supported
+#'   attributes.
+#' @param filters A single filter to use in the query for the source species.
+#'   Only `"ensembl_gene_id"` and `"external_gene_name"` are supported.
+#' @param values Values of `filters`, e.g. a character vector of Ensembl gene
+#'   IDs.
+#' @param attributesL Character vector of gene-level attributes to retrieve for
+#'   the target species, drawn from the same set as `attributes`.
+#' @param filtersL Either `""` (the default, no filtering) or a single
+#'   attribute supported by `attributesL` to filter the target-species genes
+#'   on.
+#' @param valuesL Values of `filtersL`, i.e. the target-species values to keep.
+#'   Only used when `filtersL` is not the empty string.
 #' @param ... Ignored. Used to catch no longer necessary parameters such as
 #'   `mart`, `martL`, `verbose`, `uniqueRows` and `bmHeader` from
 #'   \pkg{biomaRt} functions.
@@ -21,10 +34,26 @@
 #' `external_gene_name`, `description`, `chromosome_name`,
 #' `start_position`, `end_position`, `strand`, `gene_biotype`.
 #'
-#' Only `"ensembl_gene_id"` and `"external_gene_name"` are supported for `filter`.
+#' Only `"ensembl_gene_id"` and `"external_gene_name"` are supported for `filters`.
 #'
-#' @returns A data frame containing source-species and target-species
-#'   ortholog annotations.
+#' @returns A `data.frame` containing one row per source gene and target gene
+#'   combination. It has the following columns:
+#'   - the columns requested in `attributes`, in that order, describing the
+#'     source-species gene,
+#'   - the columns requested in `attributesL`, in that order, describing the
+#'     target-species gene.
+#'
+#'   Attributes requested in both `attributes` and `attributesL` have the same
+#'   name twice, so the target-species copies get a numeric suffix added by
+#'   `data.frame()`: with
+#'   `attributes = c("ensembl_gene_id", "external_gene_name")` and
+#'   `attributesL = c("ensembl_gene_id", "external_gene_name")`, the columns are
+#'   `ensembl_gene_id`, `external_gene_name`, `ensembl_gene_id.1` and
+#'   `external_gene_name.1`. Source genes with several orthologues in the target
+#'   species therefore appear on several rows.
+#'
+#'   If no match is found, an empty data frame with the source-species columns
+#'   only is returned.
 #'
 #' @export
 #'

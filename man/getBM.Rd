@@ -14,16 +14,16 @@ getBM(
 )
 }
 \arguments{
-\item{attributes}{Attributes you want to retrieve.  A possible list of
-attributes can be retrieved using the function \code{\link[biomaRt:listAttributes]{listAttributes()}}.}
+\item{attributes}{Character vector of attributes to retrieve. The
+supported attributes are given in the \emph{Details} section, and can also be
+listed with \code{\link[=listAttributes]{listAttributes()}}.}
 
-\item{filters}{Filters (one or more) that should be used in the query.  A
-possible list of filters can be retrieved using the function \code{\link[biomaRt:listFilters]{listFilters()}}.}
+\item{filters}{A single filter to use in the query. The supported filters
+are given in the \emph{Details} section. Only one filter can currently be
+specified at a time.}
 
-\item{values}{Values of the filter, e.g. vector of affy IDs.  If multiple
-filters are specified then the argument should be a list of vectors of which
-the position of each vector corresponds to the position of the filters in
-the filters argument.}
+\item{values}{Values of the filter, e.g. a character vector of Ensembl gene
+IDs.}
 
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
 \code{mart}, \code{checkFilters}, \code{verbose}, \code{uniqueRows}, \code{bmHeader}, \code{quote} and

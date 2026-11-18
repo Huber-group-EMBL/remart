@@ -18,40 +18,72 @@ getSequence(
 )
 }
 \arguments{
-\item{chromosome}{Chromosome name}
+\item{chromosome, start, end}{Genomic coordinates to retrieve a sequence
+from. Not supported yet: supplying \code{chromosome} currently stops with an
+error, so sequences must be requested by \code{id}.}
 
-\item{start}{start position of sequence on chromosome}
+\item{id}{An identifier or vector of identifiers, of the kind given in
+\code{type}.}
 
-\item{end}{end position of sequence on chromosome}
+\item{type}{The type of identifier given in \code{id}. Supported types are
+\code{"ensembl_gene_id"}, \code{"ensembl_transcript_id"} and
+\code{"ensembl_peptide_id"}.}
 
-\item{id}{An identifier or vector of identifiers.}
+\item{seqType}{Type of sequence to retrieve. One of
+\code{"gene_exon_intron"}, \code{"cdna"} or \code{"peptide"}.}
 
-\item{type}{The type of identifier used.  Supported types are hugo, ensembl,
-embl, entrezgene, refseq, ensemblTrans and unigene. Alternatively one can
-also use a filter to specify the type. Possible filters are given by the
-\code{\link[biomaRt:listFilters]{listFilters()}} function.}
-
-\item{seqType}{Type of sequence that you want to retrieve.  Allowed seqTypes
-are given in the details section.}
-
-\item{upstream}{To add the upstream sequence of a specified number of
-basepairs to the output.}
-
-\item{downstream}{To add the downstream sequence of a specified number of
-basepairs to the output.}
+\item{upstream, downstream}{Number of base pairs of upstream
+(\code{upstream}) or downstream (\code{downstream}) sequence to add to the output.}
 
 \item{...}{Ignored. Used to catch no longer necessary parameters such as
-\code{mart} from \pkg{biomaRt} functions.}
+\code{mart}, \code{useCache} and \code{verbose} from \pkg{biomaRt} functions.}
 
 \item{version}{Ensembl version to use for the query. If \code{NULL}, the latest
 version will be used.}
 }
 \value{
-A data frame containing the requested sequences and their
-associated metadata.
+A data frame with one row per returned sequence, and the following
+columns:
+\itemize{
+\item \code{query}: the identifier that was requested, as given in \code{id},
+\item \code{id}: the Ensembl stable ID of the sequence that was returned (e.g. the
+peptide ID when \code{type = "ensembl_gene_id"} and \code{seqType = "peptide"}),
+\item \code{seq}: the sequence itself, as a single string,
+\item \code{desc}: the description of the feature, typically its genomic location
+(e.g. \code{"chromosome:GRCh38:7:140719327:140925199:-1"}), \code{NA} when Ensembl
+does not provide one,
+\item \code{molecule}: \code{"dna"} or \code{"protein"}, depending on \code{seqType},
+\item \code{version}: the version of the returned sequence.
+}
+
+Columns are sorted alphabetically. That order is not part of the API, so
+select columns by name.
 }
 \description{
 Get Sequences from Ensembl
+}
+\details{
+Sequences are retrieved from the Ensembl REST \code{sequence/id} endpoint, rather
+than from a BioMart dataset. This has two consequences: only Ensembl stable
+IDs can be used to identify features, and genomic coordinates
+(\code{chromosome}/\code{start}/\code{end}) are not supported yet. Supplying \code{chromosome}
+stops with an error; use \code{biomaRt::getSequence()} if you need it.
+
+\code{type} must be one of:
+\itemize{
+\item \code{"ensembl_gene_id"}: retrieve the sequence(s) associated with a gene ID,
+\item \code{"ensembl_transcript_id"}: retrieve the sequence of a transcript ID,
+\item \code{"ensembl_peptide_id"}: retrieve the sequence of a peptide ID.
+}
+
+\code{seqType} must be one of:
+\itemize{
+\item \code{"gene_exon_intron"}: the genomic sequence, introns included
+(\code{molecule} is \code{"dna"}),
+\item \code{"cdna"}: the cDNA sequence, i.e. the exons spliced together
+(\code{molecule} is \code{"dna"}),
+\item \code{"peptide"}: the protein sequence (\code{molecule} is \code{"protein"}).
+}
 }
 \examples{
 getSequence(

@@ -1,6 +1,13 @@
 #' Retrieve gene/transcript annotations from Ensembl
 #'
-#' @inheritParams biomaRt::getBM
+#' @param attributes Character vector of attributes to retrieve. The
+#'   supported attributes are given in the *Details* section, and can also be
+#'   listed with [listAttributes()].
+#' @param filters A single filter to use in the query. The supported filters
+#'   are given in the *Details* section. Only one filter can currently be
+#'   specified at a time.
+#' @param values Values of the filter, e.g. a character vector of Ensembl gene
+#'   IDs.
 #' @param ... Ignored. Used to catch no longer necessary parameters such as
 #'   `mart`, `checkFilters`, `verbose`, `uniqueRows`, `bmHeader`, `quote` and
 #'   `useCache` from \pkg{biomaRt} functions.
