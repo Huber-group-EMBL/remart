@@ -250,6 +250,20 @@ Only `ensembl_gene_id` and `external_gene_name` are currently supported as the s
 target attributes are gene-level attributes; transcript-level linked queries are
 not yet supported.
 
+# Supported functionality
+
+The table below summarises what each function supports. Filters, attributes and
+`seqType` values not listed here are rejected with an error or, for arguments
+passed through `...`, silently ignored.
+
+| Function | Supported filters / `type` / `seqType` | Supported attributes | Differences from `biomaRt` | Not yet supported (and where to go instead) |
+|---|---|---|---|---|
+| `getBM()` | Filters (one at a time): `ensembl_gene_id`, `ensembl_transcript_id`, `external_gene_name` (requires `species`) | `ensembl_gene_id`, `ensembl_transcript_id`, `ensembl_peptide_id`, `external_gene_name`, `hgnc_symbol`, `description`, `chromosome_name`, `start_position`, `end_position`, `strand`, `gene_biotype`, `transcript_biotype`, `version` (see `listAttributes()`) | `mart` and other connection arguments are ignored; `species` replaces the species inferred from `mart`; `version` replaces the Ensembl release version inferred from `mart` | Multiple filters, other filters, and other attributes (e.g. external database IDs such as `entrezgene_id`). Use `biomaRt` for non-Ensembl marts or for these queries. |
+| `getGene()` | `type = "ensembl_gene_id"` (default) or `"external_gene_name"` (requires `species`) | Fixed set: `ensembl_gene_id`, `hgnc_symbol`, `description`, `chromosome_name`, `band`, `strand`, `start_position`, `end_position` | `band` is always `NA` (not available from the REST API); `mart` is ignored; `species` and `version` are added | Other `biomaRt` identifier types and `band` values. Use `getBM()` for other attributes, or `biomaRt`. |
+| `getSequence()` | `type`: `ensembl_gene_id`, `ensembl_transcript_id`, `ensembl_peptide_id`; `seqType`: `gene_exon_intron`, `cdna`, `peptide`; `upstream` / `downstream` in base pairs | Not applicable (returns sequences) | `chromosome`, `start` and `end` are not yet implemented (and throw an error) but are kept for positional compatibility; `mart`, `useCache` and `verbose` are ignored; `version` is added | Coordinate-based retrieval (`chromosome`, `start`, `end`). Use `biomaRt::getSequence()` for now. Non-Ensembl `type` values (e.g. `hgnc`, `refseq`) are not yet supported. |
+| `getLDS()` | Source filters: `ensembl_gene_id`, `external_gene_name` (requires `species`); target filter `filtersL`: one gene-level attribute, or `""` | Gene-level attributes only, for both the source (`attributes`) and target (`attributesL`) species: `ensembl_gene_id`, `external_gene_name`, `hgnc_symbol`, `description`, `chromosome_name`, `start_position`, `end_position`, `strand`, `gene_biotype`, `transcript_biotype`, `version`. Transcript-level attributes (e.g. `ensembl_transcript_id`, `ensembl_peptide_id`) are not supported. | Orthologue queries only (Ensembl `homology/id`); the target species is given with `speciesL` instead of `martL`; `mart`, `martL`, `verbose`, `uniqueRows` and `bmHeader` are ignored | Transcript-level attributes, and general cross-database linking. Use `biomaRt::getLDS()` for these. |
+| `listAttributes()` | Not applicable | Returns the attributes supported by `getBM()` and `getLDS()` | Takes no arguments | |
+
 # Migrating common `r BiocStyle::Biocpkg("biomaRt")` code
 
 A typical `r BiocStyle::Biocpkg("biomaRt")` workflow creates a connection before
