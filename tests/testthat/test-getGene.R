@@ -1,27 +1,21 @@
 test_that("single and multiple getGene() calls are identical", {
-  expect_warning(
-    multi_call <- getGene(
-      id = c("ENSG00000157764", "ENSG00000004939"),
-      type = "ensembl_gene_id"
-    ),
-    "'band' column information is not available"
-  )
+  multi_call <- getGene(
+    id = c("ENSG00000157764", "ENSG00000004939"),
+    type = "ensembl_gene_id"
+  ) |>
+    expect_no_warning()
 
-  expect_warning(
-    single_call_1 <- getGene(
-      id = "ENSG00000157764",
-      type = "ensembl_gene_id"
-    ),
-    "'band' column information is not available"
-  )
+  single_call_1 <- getGene(
+    id = "ENSG00000157764",
+    type = "ensembl_gene_id"
+  ) |>
+    expect_no_warning()
 
-  expect_warning(
-    single_call_2 <- getGene(
-      id = "ENSG00000004939",
-      type = "ensembl_gene_id"
-    ),
-    "'band' column information is not available"
-  )
+  single_call_2 <- getGene(
+    id = "ENSG00000004939",
+    type = "ensembl_gene_id"
+  ) |>
+    expect_no_warning()
 
   expect_identical(
     multi_call,
@@ -44,15 +38,13 @@ test_that("single and multiple getGene() calls are identical", {
 })
 
 test_that("getGene() works with gene symbols", {
-  expect_warning(
-    res <- getGene(
-      id = c("APOE", "MAPT"),
-      type = "external_gene_name",
-      species = "human",
-      version = "oct2024"
-    ),
-    "'band' column information is not available"
-  )
+  res <- getGene(
+    id = c("APOE", "MAPT"),
+    type = "external_gene_name",
+    species = "human",
+    version = "oct2024"
+  ) |>
+    expect_no_warning()
 
   expect_named(
     res,
@@ -76,5 +68,18 @@ test_that("getGene() fails with unsupported ID types", {
       type = "unknown_id"
     ),
     "Only Ensembl Gene IDs"
+  )
+})
+
+test_that("getGene() fills unknown IDs with NA and warns once", {
+  local_mocked_bindings(
+    .remart_lookup = function(values, ...) {
+      setNames(list(NULL, NULL), values)
+    },
+    .package = "remart"
+  )
+  expect_warning(
+    res <- getGene(id = c("ENSG00000000001", "ENSG00000000002")),
+    "not found"
   )
 })
