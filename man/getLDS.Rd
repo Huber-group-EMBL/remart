@@ -95,6 +95,7 @@ Supported filters/attributes (for both \code{filters}/\code{attributes} and
 Only \code{"ensembl_gene_id"} and \code{"external_gene_name"} are supported for \code{filters}.
 }
 \examples{
+if (is_ensembl_online()) {
 getLDS(
   attributes = c("ensembl_gene_id", "external_gene_name"),
   filters = "ensembl_gene_id",
@@ -102,6 +103,7 @@ getLDS(
   attributesL = c("ensembl_gene_id", "external_gene_name"),
   speciesL = "mouse"
 )
+}
 
 \donttest{
 # It is also possible to a gene symbol, but a species must be specified, as

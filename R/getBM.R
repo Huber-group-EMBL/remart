@@ -42,12 +42,14 @@
 #' @export
 #'
 #' @examples
+#' if (is_ensembl_online()) {
 #' attribs <- c("ensembl_gene_id", "external_gene_name", "chromosome_name")
 #' getBM(
 #'   attributes = attribs,
 #'   filters = "ensembl_gene_id",
 #'   values = c("ENSG00000157764", "ENSG00000004939")
 #' )
+#' }
 #'
 #' \donttest{
 #' # It is also possible to a gene symbol, but a species must be specified, as

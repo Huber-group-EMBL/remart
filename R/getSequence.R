@@ -53,11 +53,13 @@
 #' @export
 #'
 #' @examples
+#' if (is_ensembl_online()) {
 #' getSequence(
 #'   seqType = "gene_exon_intron",
 #'   type = "ensembl_gene_id",
 #'   id = "ENSG00000001497"
 #' )
+#' }
 #'
 #' \donttest{
 #' ids <- c(

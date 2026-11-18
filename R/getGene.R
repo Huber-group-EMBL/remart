@@ -24,10 +24,12 @@
 #' @export
 #'
 #' @examples
+#' if (is_ensembl_online()) {
 #' getGene(
 #'   "ENSG00000157764",
 #'   type = "ensembl_gene_id"
 #' )
+#' }
 #'
 #' \donttest{
 #' ids <- c(
