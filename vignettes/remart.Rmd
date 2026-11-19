@@ -104,6 +104,7 @@ if (!ensembl_online) {
   )
 }
 ```
+
 # Discover supported attributes
 
 `listAttributes()` reports the attributes currently implemented by
@@ -361,6 +362,14 @@ After initial release, feature development will be prioritized (in order) based 
 
 - Explicit feature requests from users in the [Bioconductor support forum](https://support.bioconductor.org/) and [GitHub issues](https://github.com/Huber-group-EMBL/remart/issues).
 - Use cases in Bioconductor package currently using biomaRt, ordered by their number of monthly downloads.
+
+# Understanding errors from remart
+
+Beyond currently unsupported features, there may sometimes be a network or server-related error when querying the Ensembl REST API:
+
+- HTTP 429: you have exceeded the rate limit for the Ensembl REST API. Please retry again after at least one hour. Rate limits are documented at <https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits>.
+- HTTP 5XX, or timeout: the upstream server may be temporarily unavailable. Please retry the request after some time (next day if possible).
+- HTTP 404: the requested resource could not be found on the Ensembl REST API. This may indicate an invalid ID or endpoint.
 
 # Session information
 
