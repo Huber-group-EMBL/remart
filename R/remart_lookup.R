@@ -62,7 +62,7 @@
           ids = as.list(batch),
           expand = as.integer(expand)
         )) |>
-        httr2::req_perform() |>
+        .remart_perform() |>
         httr2::resp_body_json(simplifyVector = FALSE)
     }
   ) |>
@@ -92,7 +92,7 @@
           symbols = as.list(batch),
           expand = as.integer(expand)
         )) |>
-        httr2::req_perform() |>
+        .remart_perform() |>
         httr2::resp_body_json(simplifyVector = FALSE)
     }
   ) |>
