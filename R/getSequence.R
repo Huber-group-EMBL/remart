@@ -150,6 +150,7 @@ getSequence <- function(
       "Must be one of 'gene_exon_intron', 'cdna', or 'peptide'."
     )
   )
+  req$mask_feature <- as.integer(TRUE)
 
   .remart_sequence(
     ids,
