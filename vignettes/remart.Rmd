@@ -358,6 +358,19 @@ visibility on how `r BiocStyle::Biocpkg("biomaRt")` is currently used in
 workflows in production. If you have a specific use case that is not currently
 supported, please open an issue on GitHub.
 
+## Known gaps
+
+The items below summarize known gaps in `remart` functionality. Closing these gaps will depend on the availability of the corresponding endpoints in the Ensembl REST API, and priority as described below the table. "REST support" indicates whether the Ensembl REST API exposes what is
+needed.
+
+| Gap | Ensembl REST support | Issue |
+|---|---|---|
+| Multiple filters in `getBM()` | No single endpoint accepts arbitrary filter combinations. Requests are ID-based, so combining filters will need client-side filtering of results. | |
+| External-ID conversion (e.g. `entrezgene_id`) | Yes, via the cross-reference endpoints (`xrefs/id`, `xrefs/symbol`). | |
+| Coordinate-based `getSequence()` | Yes, via `sequence/region`. | |
+| Transcript-level `getLDS()` | Partial. `homology/id` returns gene-level orthologues. Transcript-level attributes will need additional lookups. | |
+| `listFilters()` | Not needed: the supported filters are fixed in `remart`, so the list can be returned locally. | [#17](https://github.com/Huber-group-EMBL/remart/issues/17) |
+
 After initial release, feature development will be prioritized (in order) based on:
 
 - Explicit feature requests from users in the [Bioconductor support forum](https://support.bioconductor.org/) and [GitHub issues](https://github.com/Huber-group-EMBL/remart/issues).
