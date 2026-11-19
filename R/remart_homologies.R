@@ -10,7 +10,7 @@
       `content-type` = "application/json"
     ) |>
     httr2::req_user_agent(REMART_USER_AGENT) |>
-    httr2::req_perform() |>
+    .remart_perform() |>
     httr2::resp_body_json(simplifyVector = FALSE)
 
   resp$data[[1]]$homologies
@@ -30,7 +30,7 @@
       `content-type` = "application/json"
     ) |>
     httr2::req_user_agent(REMART_USER_AGENT) |>
-    httr2::req_perform() |>
+    .remart_perform() |>
     httr2::resp_body_json(simplifyVector = FALSE)
 
   resp$data[[1]]$homologies

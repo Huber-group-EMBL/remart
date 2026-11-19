@@ -21,7 +21,7 @@
         httr2::req_method("POST") |>
         httr2::req_user_agent(REMART_USER_AGENT) |>
         httr2::req_body_json(req) |>
-        httr2::req_perform() |>
+        .remart_perform() |>
         httr2::resp_body_json(simplifyVector = TRUE)
     }
   ) |>
