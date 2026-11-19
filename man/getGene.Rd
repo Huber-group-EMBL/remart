@@ -45,10 +45,11 @@ and a warning listing them is issued.
 Retrieves gene annotation information from Ensembl
 }
 \examples{
-if (is_ensembl_online()) {
+if (is_ensembl_online(version = "may2024")) {
 getGene(
   "ENSG00000157764",
-  type = "ensembl_gene_id"
+  type = "ensembl_gene_id",
+  version = "may2024"
 )
 }
 

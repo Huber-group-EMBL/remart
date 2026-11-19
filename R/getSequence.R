@@ -53,11 +53,12 @@
 #' @export
 #'
 #' @examples
-#' if (is_ensembl_online()) {
+#' if (is_ensembl_online(version = "may2024")) {
 #' getSequence(
 #'   seqType = "gene_exon_intron",
 #'   type = "ensembl_gene_id",
-#'   id = "ENSG00000001497"
+#'   id = "ENSG00000001497",
+#'   version = "may2024"
 #' )
 #' }
 #'

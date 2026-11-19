@@ -96,7 +96,7 @@ Before anything else, we check if the Ensembl service is online using `is_ensemb
 ```{r}
 #| label: check-ensembl-online
 
-ensembl_online <- is_ensembl_online()
+ensembl_online <- is_ensembl_online(version = "may2024")
 if (!ensembl_online) {
   message(
     "Ensembl service is currently offline.",
@@ -139,7 +139,8 @@ gene_annotations <- getBM(
     "end_position"
   ),
   filters = "ensembl_gene_id",
-  values = gene_ids
+  values = gene_ids,
+  version = "may2024"
 )
 
 head(gene_annotations)
@@ -166,7 +167,8 @@ transcript_annotations <- getBM(
     "transcript_biotype"
   ),
   filters = "ensembl_gene_id",
-  values = "ENSG00000157764"
+  values = "ENSG00000157764",
+  version = "may2024"
 )
 
 head(transcript_annotations)
@@ -186,7 +188,8 @@ getBM(
     "ensembl_peptide_id"
   ),
   filters = "ensembl_transcript_id",
-  values = "ENST00000357654"
+  values = "ENST00000357654",
+  version = "may2024"
 )
 ```
 
@@ -201,7 +204,8 @@ convenient gene-level interface:
 
 getGene(
   id = c("ENSG00000157764", "ENSG00000004939"),
-  type = "ensembl_gene_id"
+  type = "ensembl_gene_id",
+  version = "may2024"
 )
 ```
 
@@ -224,7 +228,8 @@ For example, a cDNA sequence can be retrieved for a transcript as follows:
 cdna <- getSequence(
   seqType = "cdna",
   type = "ensembl_transcript_id",
-  id = "ENST00000357654"
+  id = "ENST00000357654",
+  version = "may2024"
 )
 
 summary(cdna)
@@ -241,7 +246,8 @@ extended_cdna <- getSequence(
   type = "ensembl_transcript_id",
   id = "ENST00000357654",
   upstream = 100,
-  downstream = 100
+  downstream = 100,
+  version = "may2024"
 )
 
 summary(extended_cdna)
@@ -268,7 +274,8 @@ orthologues <- getLDS(
   filters = "ensembl_gene_id",
   values = "ENSG00000157764",
   attributesL = c("ensembl_gene_id", "external_gene_name"),
-  speciesL = "mouse"
+  speciesL = "mouse",
+  version = "may2024"
 )
 
 orthologues

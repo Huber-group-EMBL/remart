@@ -58,13 +58,14 @@
 #' @export
 #'
 #' @examples
-#' if (is_ensembl_online()) {
+#' if (is_ensembl_online(version = "may2024")) {
 #' getLDS(
 #'   attributes = c("ensembl_gene_id", "external_gene_name"),
 #'   filters = "ensembl_gene_id",
 #'   values = "ENSG00000157764",
 #'   attributesL = c("ensembl_gene_id", "external_gene_name"),
-#'   speciesL = "mouse"
+#'   speciesL = "mouse",
+#'   version = "may2024"
 #' )
 #' }
 #'
