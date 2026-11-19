@@ -205,6 +205,31 @@ test_that("getLDS() filtersL/valuesL keeps only matching orthologues", {
   )
 })
 
+test_that("getLDS() returns an empty data frame for a gene with no orthologues in speciesL", {
+  # Fixture: Ensembl returns `homologies: []` for BRAF vs. S. cerevisiae
+  res <- getLDS(
+    attributes = c("ensembl_gene_id", "external_gene_name"),
+    filters = "ensembl_gene_id",
+    values = "ENSG00000157764",
+    attributesL = c("ensembl_gene_id", "external_gene_name"),
+    speciesL = "saccharomyces_cerevisiae",
+    version = "oct2024"
+  ) |>
+    expect_no_error() |>
+    expect_no_warning()
+
+  expect_identical(nrow(res), 0L)
+  expect_named(
+    res,
+    c(
+      "ensembl_gene_id",
+      "external_gene_name",
+      "ensembl_gene_id.1",
+      "external_gene_name.1"
+    )
+  )
+})
+
 test_that("getLDS() fails with a missing or empty speciesL", {
   expect_error(
     getLDS(
